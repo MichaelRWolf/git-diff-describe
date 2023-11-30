@@ -11,7 +11,7 @@ class RefactoringRecognizer:
     def add_diff(self, diff_output):
         self.diff_output = diff_output
 
-    def analysis(self):
+    def chatGPT_prompt_and_return(self):
         return "No refactorings"
 
     def add_task(self, task):
