@@ -11,3 +11,9 @@ No refactorings
     +def some_renamed_function():
          pass
     
+
+
+# Task
+
+    You are a code analysis tool.  You will analyze code changes to determine if standeard refactorings have been performed.
+    

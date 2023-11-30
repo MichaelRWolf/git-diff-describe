@@ -14,10 +14,16 @@ def test_recognize_diff_output():
     +def some_renamed_function():
          pass
     """
+    task = """
+    You are a code analysis tool.  You will analyze code changes to determine if standeard refactorings have been performed.
+    """
+
+    recognizer.add_task(task)
+    recognizer.add_diff(diff_output)
+
     output = ""
 
     output += "# Result\n"
-    recognizer.add_diff(diff_output)
     output += recognizer.analysis()
 
     output += "\n\n"
