@@ -1,7 +1,7 @@
 # test_refactoring_recognizer.py
 from approvaltests import verify
 # Import your RefactoringRecognizer class. Update the path as appropriate
-from refactoring_recognizer import RefactoringRecognizer, analysis
+from refactoring_recognizer import RefactoringRecognizer
 
 
 def test_recognize_diff_output():
@@ -23,6 +23,6 @@ def test_recognize_diff_output():
 
     output += "# Result\n"
     recognizer.add_diff(diff_output)
-    output += analysis()
+    output += recognizer.analysis()
 
     verify(output)
