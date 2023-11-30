@@ -15,7 +15,9 @@ def test_recognize_diff_output():
          pass
     """
     task = """
-    You are a code analysis tool.  You will analyze code changes to determine if standeard refactorings have been performed.
+Task: infer_refactoring
+Please analyze the following unified diff output to determine if any standard refactorings can be identified. 
+If a refactoring is detected, name the refactoring and provide the relevant details, such as the functions or variables involved.
     """
 
     recognizer.add_task(task)
