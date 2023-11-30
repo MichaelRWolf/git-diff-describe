@@ -4,7 +4,7 @@ from approvaltests import verify
 from refactoring_recognizer import RefactoringRecognizer
 
 
-def test_recognize_diff_output():
+def test_recognize_rename_method():
     recognizer = RefactoringRecognizer()
     diff_output = """
     --- a/original_file.py
