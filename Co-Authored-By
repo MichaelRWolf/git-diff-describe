@@ -1,0 +1,40 @@
+#! /bin/bash
+# HOW TO automate co-author attribution
+# 1) At beginning of session, 'enable' a co-author by removing leading '#'
+#
+# 2) First commit can append co-authors thusly:
+#
+#    commit -m "A real commit message$(bash ./Co-Authored-By.sh)"
+#
+# 3) Subsequent commits can bring back this command line for simple modification
+
+
+echo				# Terminate (likely) incomplete line
+echo				# Inject blank line
+
+cat <<CO-AUTHORED-BY |          # NOTE: pipe command STARTS here, but COMPLETES below
+
+#Co-Authored-By: Gregor Riegler <rieglerg85@gmail.com>
+Co-Authored-By: Nitsan Avni <nitsanav@gmail.com>
+#Co-Authored-By: Joel Silberman <42779942+jcs-instructor@users.noreply.github.com>
+Co-Authored-By: 4dsherwood <4dsherwood@users.noreply.github.com>
+#Co-Authored-By: Blaise Pabon <blaise@gmail.com>
+#Co-Authored-By: Michael R. Wolf <MichaelRWolf@att.net>
+
+#Co-Authored-By: Idan Melamed <idanmel@gmail.com>
+#Co-Authored-By: Tsvetan Tsvetanov <cpi.cecko@gmail.com>
+
+#Co-Authored-By: Austin Chadwick <austin.chadwick11@gmail.com>
+#Co-Authored-By: Rea <reasu@protonmail.com>
+#Co-Authored-By: David Campey <campey@gmail.com>
+#Co-Authored-by: Zac Ball <zac156@gmail.com>
+#Co-Authored-By: Kitastro <admin@metafor.co.za>
+
+# Leave the following line alone!!!
+CO-AUTHORED-BY
+
+# NOTE: pipe command COMPLETES here, but was started ABOVE
+
+# Discard (1) disabled co-authors (2) blank lines
+    grep -v '#' |		
+    grep -v '^[[:space:]]*$'	
