@@ -18,6 +18,12 @@ def test_recognize_diff_output():
 Task: infer_refactoring
 Please analyze the following unified diff output to determine if any standard refactorings can be identified. 
 If a refactoring is detected, name the refactoring and provide the relevant details, such as the functions or variables involved.
+
+Do not provide explanations for refactoring names (e.g. rename variable, extract method).  
+Assume theat the user will understand the names.  
+But _do_ provide details about the refactoring like original identifier and new identifier.
+
+Provide analysis in JSON format with fields like 'refactoring name', 'variable mame - original', 'variable name - new'.
     """
 
     recognizer.add_task(task)
