@@ -25,4 +25,9 @@ def test_recognize_diff_output():
     recognizer.add_diff(diff_output)
     output += recognizer.analysis()
 
+    output += "\n\n"
+
+    output += "# __str__\n"
+    output += str(recognizer)
+
     verify(output)

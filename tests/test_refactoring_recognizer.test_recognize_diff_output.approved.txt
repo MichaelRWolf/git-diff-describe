@@ -10,3 +10,6 @@
 
 # Result
 No refactorings
+
+# __str__
+Can not (yet) stringify
