@@ -25,8 +25,10 @@ If a refactoring is detected, name the refactoring and provide the relevant deta
 
     output = ""
 
+    recognizer.chatGPT_prompt_and_return()
+
     output += "# Result\n"
-    output += recognizer.chatGPT_prompt_and_return()
+    output += recognizer.analysis()\
 
     output += "\n\n"
 
