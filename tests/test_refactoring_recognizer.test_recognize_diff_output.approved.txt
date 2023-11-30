@@ -12,4 +12,12 @@
 No refactorings
 
 # __str__
-Can not (yet) stringify
+# Diff output
+
+    --- a/original_file.py
+    +++ b/updated_file.py
+    @@ -1,4 +1,4 @@
+    -def some_function():
+    +def some_renamed_function():
+         pass
+    

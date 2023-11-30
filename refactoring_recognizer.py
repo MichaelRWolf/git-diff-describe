@@ -1,7 +1,9 @@
 class RefactoringRecognizer:
     def __str__(self):
-        str = "Can not (yet) stringify"
-        return str
+        s = ''
+        s += "# Diff output\n"
+        s += self.diff_output + "\n"
+        return s
 
     def add_diff(self, diff_output):
         self.diff_output = diff_output
