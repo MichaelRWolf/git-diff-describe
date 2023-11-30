@@ -1,3 +1,4 @@
 class RefactoringRecognizer:
-    def recognize(self, diff_output):
-        return "No refactorings"
+
+    def add_diff(self, diff_output):
+        self.diff_output = diff_output

@@ -22,6 +22,7 @@ def test_recognize_diff_output():
     output += "\n\n"
 
     output += "# Result\n"
-    output += recognizer.recognize(diff_output)
+    recognizer.add_diff(diff_output)
+    output += "No refactorings"
 
     verify(output)
