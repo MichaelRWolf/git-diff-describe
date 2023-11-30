@@ -1,0 +1,57 @@
+# Gregor observation -
+We are sending code diff to ChatGPT.
+And also sending instructions - saying that we want it to recognize refactorings.
+And to answer in specific format -- JSON
+Doing all of this in Python.
+Using ApprovalTests to make sure it is (?) reproducible.
+
+# Nitsan
+The return value is reproducable.  Because the prompt format was specified
+
+# Gregor
+- We can use _ghis_(?) to evaluate how often it gives correct answer.
+
+# Joel
+- It looks like this is built to recognize refactorings.
+- ? Is this part of the bigger goal.
+- ? Why did we ask it for one type of code change (refactorings only) instead of other types
+- It seems like this cannot work because the LLM models are not reproducible.
+- ? How to you handle unreproducable output versus needs for testing.
+- ? Inherent in creative output (e.g. Dall-e) ... there is no right answer.
+- AI is not deterministic.
+
+# Michael
+- We are at human-in-the-loop.
+
+# Nitsan
+- Ideas
+ - Extend JSON to create refactoring -- Recommend format.  Suggest ACN.
+ - Use LLM as testing mechanism by having it review (in a separate prompt) and rate it 1-7.
+    - Maybe that (review) could make the (original?) message fail.
+    - This (may) get human out of the loop.
+
+# Michael
+?????
+- Interesting that we ask for refactoring.  And ask for commit message.
+- As programmers, we knee-jerk try to subdivide the problem.
+- Maybe the right way to use AI is different from how we've been taught to think like programmers.
+- Have multiple messages per commit.
+- We are asking it do one thing.
+- We could do this 'commit message' retroactively, thus using it to explore the past, not just the current slice.
+
+# Proposals...
+- Let's get coding.
+- What's the goal?
+  Lean-coffee style????
+  - High level goal -
+      - Use AI tool to generate commit messages.
+      - Work together.  Experience working together.  Learning.
+  - Medium goal - recognize refacgoring (holding off other recognitions until later)
+  - Small goal - Bridge gap between refactoring automation -> commit message generation
+  - <size> goal - Continue in same code base.
+
+
+
+
+What?  So what?  Now what?
+
