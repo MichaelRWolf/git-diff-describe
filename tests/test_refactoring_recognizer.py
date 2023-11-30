@@ -23,6 +23,10 @@ def test_recognize_diff_output():
 
     output += "# Result\n"
     recognizer.add_diff(diff_output)
-    output += "No refactorings"
+    output += analysis()
 
     verify(output)
+
+
+def analysis():
+    return "No refactorings"
