@@ -16,11 +16,6 @@ def test_recognize_diff_output():
     """
     output = ""
 
-    output += "# Diff output\n"
-    output += diff_output
-
-    output += "\n\n"
-
     output += "# Result\n"
     recognizer.add_diff(diff_output)
     output += recognizer.analysis()
