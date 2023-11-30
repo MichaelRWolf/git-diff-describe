@@ -14,5 +14,14 @@ def test_recognize_diff_output():
     +def some_renamed_function():
          pass
     """
-    output = recognizer.recognize(diff_output)
+    output = ""
+
+    output += "# Diff output\n"
+    output += diff_output
+
+    output += "\n\n"
+
+    output += "# Result\n"
+    output += recognizer.recognize(diff_output)
+
     verify(output)
