@@ -13,7 +13,9 @@
 # - ~/.chat should be a folder
 # - ~/.chatrc
 
-CHAT_FILE="$HOME/.chat"
+function bat_or_cat_stdin {
+    bat "${@}" || cat
+}
 
 MODEL="gpt-4-1106-preview"
 API_URL="https://api.openai.com/v1/chat/completions"
@@ -21,8 +23,11 @@ API_URL="https://api.openai.com/v1/chat/completions"
 CONTINUE=false
 SHOW_CONVERSATION=false
 
-while getopts ":3cs" opt; do
+while getopts "i:3cs" opt; do
   case $opt in
+  i)
+   CHAT_ID="${OPTARG}"
+   ;;
   3)
     MODEL="gpt-3.5-turbo"
     ;;
@@ -40,8 +45,15 @@ while getopts ":3cs" opt; do
 done
 shift $((OPTIND - 1))
 
+
+CHAT_FILE="$HOME/.chat"
+if [[ "${CHAT_ID}" != '' ]]; then
+   CHAT_FILE="${CHAT_FILE}.${CHAT_ID}"
+fi
+
+
 if $SHOW_CONVERSATION; then
-  jq -r '.[]|("# "+.role,"",.content,"","")' "$CHAT_FILE" | bat -l md --style plain
+  jq -r '.[]|("# "+.role,"",.content,"","")' "$CHAT_FILE" | bat_or_cat_stdin -l md --style plain
   exit 0
 fi
 
@@ -52,6 +64,7 @@ if $CONTINUE && [ -s "$CHAT_FILE" ]; then
 else
   OLD_CONVERSATION_JSON="[]"
 fi
+
 
 OLD_CONVERSATION_JSON=$(echo "$OLD_CONVERSATION_JSON" |
   jq --arg msg "$USER_MESSAGE" '. + [{"role": "user", "content": $msg}]')
@@ -79,4 +92,8 @@ echo "$OLD_CONVERSATION_JSON" |
 # print gpt's reponse
 echo "$RESPONSE" |
   jq -r '(.choices[0].message.content,.error.message)//empty' |
-  (bat -l md --file-name GPT --style plain --paging=never - || cat -)
+  bat_or_cat_stdin -l md --file-name GPT --style plain --paging=never
+
+
+
+
