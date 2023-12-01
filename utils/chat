@@ -27,6 +27,7 @@ while getopts "i:3cs" opt; do
   case $opt in
   i)
    CHAT_ID="${OPTARG}"
+   CONTINUE=true
    ;;
   3)
     MODEL="gpt-3.5-turbo"
