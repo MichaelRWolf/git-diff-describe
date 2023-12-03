@@ -18,6 +18,37 @@ Provide analysis in JSON format with fields like:
  - variable-name-new
 """
 
+def test_recognize_rename_one_variable():
+    recognizer = RefactoringRecognizer()
+    diff_output = """
+    --- tests/diffs/lwh_original.py	2023-12-03 18:36:26
++++ tests/diffs/lwh_rename_one_variable.py	2023-12-03 18:37:47
+@@ -6,5 +6,5 @@
+     l = 3
+     w = 4
+     h = 5
+-    vol = fn(l, w, h)
+-    print vol
++    volume = fn(l, w, h)
++    print volume
+"""
+    recognizer.add_task(refactoring_task_description)
+    recognizer.add_diff(diff_output)
+
+    output = ""
+
+    recognizer.chatGPT_prompt_and_return()
+
+    output += "# Result\n"
+    output += recognizer.analysis()\
+
+    output += "\n\n"
+
+    output += "# __str__\n"
+    output += str(recognizer)
+
+    verify(output)
+
 def test_recognize_rename_method():
     recognizer = RefactoringRecognizer()
     diff_output = """

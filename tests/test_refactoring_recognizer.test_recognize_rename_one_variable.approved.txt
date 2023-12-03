@@ -1,0 +1,41 @@
+# Result
+```json
+{
+  "refactoring-name": "rename variable",
+  "variable-name-original": "vol",
+  "variable-name-new": "volume"
+}
+```
+
+
+# __str__
+# Diff output
+
+    --- tests/diffs/lwh_original.py	2023-12-03 18:36:26
++++ tests/diffs/lwh_rename_one_variable.py	2023-12-03 18:37:47
+@@ -6,5 +6,5 @@
+     l = 3
+     w = 4
+     h = 5
+-    vol = fn(l, w, h)
+-    print vol
++    volume = fn(l, w, h)
++    print volume
+
+
+
+# Task
+
+Task: infer_refactoring
+Please analyze the following unified diff output to determine if any standard refactorings can be identified. 
+If a refactoring is detected, name the refactoring and provide the relevant details, such as the functions or variables involved.
+
+Do not provide explanations for refactoring names (e.g. rename variable, extract method).  
+Assume theat the user will understand the names.  
+But _do_ provide details about the refactoring like original identifier and new identifier.
+
+Provide analysis in JSON format with fields like:
+ - refactoring-name
+ - variable-mame-original 
+ - variable-name-new
+
