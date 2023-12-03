@@ -14,7 +14,7 @@ def test_recognize_rename_method():
     +def some_renamed_function():
          pass
     """
-    task = """
+    refactoring_task_description = """
 Task: infer_refactoring
 Please analyze the following unified diff output to determine if any standard refactorings can be identified. 
 If a refactoring is detected, name the refactoring and provide the relevant details, such as the functions or variables involved.
@@ -26,7 +26,7 @@ But _do_ provide details about the refactoring like original identifier and new 
 Provide analysis in JSON format with fields like 'refactoring name', 'variable mame - original', 'variable name - new'.
     """
 
-    recognizer.add_task(task)
+    recognizer.add_task(refactoring_task_description)
     recognizer.add_diff(diff_output)
 
     output = ""
