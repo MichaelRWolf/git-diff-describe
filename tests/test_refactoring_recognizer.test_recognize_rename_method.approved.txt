@@ -1,9 +1,9 @@
 # Result
 ```json
 {
-  "refactoring name": "rename method",
-  "method name - original": "some_function",
-  "method name - new": "some_renamed_function"
+  "refactoring-name": "rename method",
+  "method-name-original": "some_function",
+  "method-name-new": "some_renamed_function"
 }
 ```
 
@@ -30,5 +30,8 @@ Do not provide explanations for refactoring names (e.g. rename variable, extract
 Assume theat the user will understand the names.  
 But _do_ provide details about the refactoring like original identifier and new identifier.
 
-Provide analysis in JSON format with fields like 'refactoring name', 'variable mame - original', 'variable name - new'.
-    
+Provide analysis in JSON format with fields like:
+ - refactoring-name
+ - variable-mame-original 
+ - variable-name-new
+
