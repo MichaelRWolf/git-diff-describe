@@ -54,7 +54,7 @@ fi
 
 
 if $SHOW_CONVERSATION; then
-  jq -r '.[]|("# "+.role,"",.content,"","")' "$CHAT_FILE" | bat_or_cat_stdin -l md --style plain
+  jq -r '.[]|("# "+.role,"",.content,"","")' "$CHAT_FILE" | bat_or_cat_stdin --language md --style plain
   exit 0
 fi
 
@@ -93,7 +93,7 @@ echo "$OLD_CONVERSATION_JSON" |
 # print gpt's reponse
 echo "$RESPONSE" |
   jq -r '(.choices[0].message.content,.error.message)//empty' |
-  bat_or_cat_stdin -l md --file-name GPT --style plain --paging=never
+  bat_or_cat_stdin --language md --file-name GPT --style plain --paging=never
 
 
 
