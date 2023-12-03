@@ -12,7 +12,7 @@ fi
 GIT_REPO_BASE=$(git rev-parse --show-toplevel)
 
 if [ $? -eq 0 ]; then
-    export PATH="${PATH}:${GIT_REPO_BASE}/utils"
+    export PATH="${GIT_REPO_BASE}/utils:${PATH}"
 else
     echo "Error: Not inside a Git repository." >&2
     exit 2
