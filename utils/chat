@@ -26,7 +26,7 @@ SHOW_CONVERSATION=false
 while getopts "i:3cs" opt; do
   case $opt in
   i)
-   CHAT_ID="${OPTARG}"
+   CHAT_ID=$(echo "${OPTARG}" | tr '[:upper:]'  '[:lower:]')
    CONTINUE=true
    ;;
   3)
