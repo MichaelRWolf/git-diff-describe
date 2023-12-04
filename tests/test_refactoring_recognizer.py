@@ -64,6 +64,41 @@ def test_recognize_rename_one_variable():
     output += str(recognizer)
 
     verify(output)
+def test_recognize_rename_three_variables():
+    recognizer = RefactoringRecognizer()
+    diff_output = """
+--- tests/diffs/lwh_original.py	2023-12-03 18:36:26
++++ tests/diffs/lwh_rename_three_variables.py	2023-12-03 19:09:18
+@@ -3,8 +3,8 @@
+     return value
+ 
+ def main():
+-    l = 3
+-    w = 4
+-    h = 5
+-    vol = fn(l, w, h)
++    length = 3
++    width = 4
++    height = 5
++    vol = fn(length, width, height)
+     print vol
+"""
+    recognizer.add_task(refactoring_task_description)
+    recognizer.add_diff(diff_output)
+
+    output = ""
+
+    recognizer.chatGPT_prompt_and_return()
+
+    output += "# Result\n"
+    output += recognizer.analysis()\
+
+    output += "\n\n"
+
+    output += "# __str__\n"
+    output += str(recognizer)
+
+    verify(output)
 
 def test_recognize_rename_method():
     recognizer = RefactoringRecognizer()
