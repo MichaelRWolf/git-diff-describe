@@ -72,11 +72,16 @@ Provide additional attributes if you think they are necessary.
     - Replace Conditional with Inheritance
 
 # Formt
-Output YAML format.  Do output quotes around values when they are not necessary.
+Output YAML format.  
+  - Do output quotes around values when they are not necessary.
+  - Do not put blank lines between items in an array (or list)
+  - Even if there is only one refacoring, output it as a list (with one element)
 
 For each refactoring, output these fields.
  - refactoring_name - Use the preferred name, not alternate names
  - [attributes] - See below for suggested attributes based on 'refactoring-name'.
+     Do not output 'attributes' as a collection for attributes.  
+     Simply place the attributes at the same level as 'refactoring_name'.
  - [other] - if you feel that other information would be necessary to categorize the refactoring
 """
 
