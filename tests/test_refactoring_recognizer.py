@@ -1,5 +1,4 @@
 # test_refactoring_recognizer.py
-import json
 
 from approvaltests import verify
 # Import your RefactoringRecognizer class. Update the path as appropriate
@@ -71,11 +70,11 @@ Provide additional attributes if you think they are necessary.
   alternate_names:
     - Replace Conditional with Inheritance
 
-# Formt
+# Format
 Output YAML format.  
   - Do output quotes around values when they are not necessary.
-  - Do not put blank lines between items in an array (or list)
-  - Even if there is only one refacoring, output it as a list (with one element)
+  - Always put blank lines between items in an array (or list)
+  - Even if there is only one refactoring, output it as a list (with one element)
 
 For each refactoring, output these fields.
  - refactoring_name - Use the preferred name, not alternate names
