@@ -17,6 +17,16 @@ class RefactoringRecognizer:
     def add_diff(self, diff_output):
         self.diff_output = diff_output
 
+    def subprocess_info(self):
+        info = ""
+        info += "stdout\n" + self.gpt_result.stdout
+        info += "\n\n"
+        info += "stderr\n" + self.gpt_result.stderr
+        info += "\n\n"
+        info += "returncode\n" + str(self.gpt_result.returncode)
+        info += "\n"
+        return info
+
     def chatGPT_prompt_and_return(self):
         prompt = self.assemble_prompt()
 

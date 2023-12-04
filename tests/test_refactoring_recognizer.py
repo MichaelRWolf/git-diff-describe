@@ -107,6 +107,11 @@ def test_recognize_rename_one_variable():
 
     recognizer.chatGPT_prompt_and_return()
 
+    output += "# subprocess\n"
+    output += recognizer.subprocess_info()
+
+    output += "\n\n"
+
     output += "# Result\n"
     output += str(recognizer.analysis())
 
@@ -144,6 +149,10 @@ def test_recognize_rename_three_variables():
 
     recognizer.chatGPT_prompt_and_return()
 
+    output += "# subprocess\n"
+    output += recognizer.subprocess_info()
+
+    output += "\n\n"
     output += "# Result\n"
     output += canonical_json_string(recognizer.analysis())
 
@@ -172,6 +181,11 @@ def test_recognize_rename_method():
     output = ""
 
     recognizer.chatGPT_prompt_and_return()
+
+    output += "# subprocess\n"
+    output += recognizer.subprocess_info()
+
+    output += "\n\n"
 
     output += "# Result\n"
     output += canonical_json_string(recognizer.analysis())

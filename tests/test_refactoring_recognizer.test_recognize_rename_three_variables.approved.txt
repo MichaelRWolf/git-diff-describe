@@ -1,11 +1,37 @@
+# subprocess
+stdout
+```yaml
+- refactoring_name: Rename Variable
+  original_name: l
+  new_name: length
+
+- refactoring_name: Rename Variable
+  original_name: w
+  new_name: width
+
+- refactoring_name: Rename Variable
+  original_name: h
+  new_name: height
+```
+
+
+stderr
+
+
+returncode
+0
+
+
 # Result
 ```yaml
 - refactoring_name: Rename Variable
   original_name: l
   new_name: length
+
 - refactoring_name: Rename Variable
   original_name: w
   new_name: width
+
 - refactoring_name: Rename Variable
   original_name: h
   new_name: height
@@ -91,11 +117,11 @@ Provide additional attributes if you think they are necessary.
   alternate_names:
     - Replace Conditional with Inheritance
 
-# Formt
+# Format
 Output YAML format.  
   - Do output quotes around values when they are not necessary.
-  - Do not put blank lines between items in an array (or list)
-  - Even if there is only one refacoring, output it as a list (with one element)
+  - Always put blank lines between items in an array (or list)
+  - Even if there is only one refactoring, output it as a list (with one element)
 
 For each refactoring, output these fields.
  - refactoring_name - Use the preferred name, not alternate names
