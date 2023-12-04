@@ -1,38 +1,85 @@
 # test_refactoring_recognizer.py
+import json
+
 from approvaltests import verify
 # Import your RefactoringRecognizer class. Update the path as appropriate
 from refactoring_recognizer import RefactoringRecognizer
 
+
+def canonical_json_string(non_canonical_string):
+    # Convert the Python dictionary to a canonical JSON string with sorted keys
+    # and an indentation of 4 spaces.
+    # data = json.loads(non_canonical_string)
+    # canonical_string = json.dumps(data, sort_keys=True, indent=4, separators=(',', ': '))
+    return non_canonical_string
+
+
 refactoring_task_description = """
-Task: infer_refactoring
-Please analyze the following unified diff output to determine if any standard refactorings can be identified. 
-If a refactoring is detected, name the refactoring and provide the relevant details, such as the functions or variables involved.
+# Task: infer_refactoring
 
-Do not provide explanations for refactoring names (e.g. rename variable, extract method).  
-Assume theat the user will understand the names.  
-But _do_ provide details about the refactoring like original identifier and new identifier.
+Analyze the following output provided in 'unified diff' format
+Determine if any standard software code refactorings can be identified. 
+If a refactoring is detected, provide output including
+  - preferred refactoring name
+  - attributes specific to this refactoring
+  
+Assume that the user will understand common refactorings, so do not provide explanations for them.
 
-Provide analysis in JSON format a required field named 'refactoring-name'.
-Depending on the refactoring name, also report values for attributes listed below.
- 
+# Preferred refactoring name(s)
 Many similar names are commonly used for a refactoring.  
-When you report a refactoring, I would like to standardize the naming according to the groupings below.  
-That is, the 'refactoring-name' field should have the value from 'preferred name', not a value from 'other common names'.
+When you report a refactoring, use 'preferred name' below instead of one of the 'alternate names'.
 
+Further describe the refactoring by providing the attributes listed for each refactoring.
 
-preferred name: rename function
-other common names: rename method
-attributes:
-  - function name original
-  - function name new
-  
-preferred name: rename variable
-other common names: rename constant
-attributes:
-  - variable name original
-  - variable name new
-  
+Provide additional attributes if you think they are necessary.
+
+- preferred_name: Rename Variable
+  alternate_names:
+    - Rename Identifier
+  attributes:
+    - original_name
+    - new_name
+
+- preferred_name: Rename Function
+  alternate_names:
+    - Rename Method
+  attributes:
+    - original_name
+    - new_name
+
+- preferred_name: Extract Method
+  alternate_names:
+    - Extract Function
+    - Extract Procedure
+  attributes:
+    - new_name
+
+- preferred_name: Move Method
+  alternate_names:
+    - Move Function
+    - Move Procedure
+
+- preferred_name: Extract Class
+  alternate_names:
+    - Extract Module
+
+- preferred_name: Change Signature
+  alternate_names:
+    - Modify Function Signature
+
+- preferred_name: Replace Conditional with Polymorphism
+  alternate_names:
+    - Replace Conditional with Inheritance
+
+# Formt
+Output YAML format.  Do output quotes around values when they are not necessary.
+
+For each refactoring, output these fields.
+ - refactoring_name - Use the preferred name, not alternate names
+ - [attributes] - See below for suggested attributes based on 'refactoring-name'.
+ - [other] - if you feel that other information would be necessary to categorize the refactoring
 """
+
 
 def test_recognize_rename_one_variable():
     recognizer = RefactoringRecognizer()
@@ -56,7 +103,7 @@ def test_recognize_rename_one_variable():
     recognizer.chatGPT_prompt_and_return()
 
     output += "# Result\n"
-    output += recognizer.analysis()\
+    output += str(recognizer.analysis())
 
     output += "\n\n"
 
@@ -64,6 +111,8 @@ def test_recognize_rename_one_variable():
     output += str(recognizer)
 
     verify(output)
+
+
 def test_recognize_rename_three_variables():
     recognizer = RefactoringRecognizer()
     diff_output = """
@@ -91,7 +140,7 @@ def test_recognize_rename_three_variables():
     recognizer.chatGPT_prompt_and_return()
 
     output += "# Result\n"
-    output += recognizer.analysis()\
+    output += canonical_json_string(recognizer.analysis())
 
     output += "\n\n"
 
@@ -99,6 +148,7 @@ def test_recognize_rename_three_variables():
     output += str(recognizer)
 
     verify(output)
+
 
 def test_recognize_rename_method():
     recognizer = RefactoringRecognizer()
@@ -119,7 +169,7 @@ def test_recognize_rename_method():
     recognizer.chatGPT_prompt_and_return()
 
     output += "# Result\n"
-    output += recognizer.analysis()\
+    output += canonical_json_string(recognizer.analysis())
 
     output += "\n\n"
 
