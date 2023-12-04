@@ -12,10 +12,26 @@ Do not provide explanations for refactoring names (e.g. rename variable, extract
 Assume theat the user will understand the names.  
 But _do_ provide details about the refactoring like original identifier and new identifier.
 
-Provide analysis in JSON format with fields like:
- - refactoring-name
- - variable-mame-original 
- - variable-name-new
+Provide analysis in JSON format a required field named 'refactoring-name'.
+Depending on the refactoring name, also report values for attributes listed below.
+ 
+Many similar names are commonly used for a refactoring.  
+When you report a refactoring, I would like to standardize the naming according to the groupings below.  
+That is, the 'refactoring-name' field should have the value from 'preferred name', not a value from 'other common names'.
+
+
+preferred name: rename function
+other common names: rename method
+attributes:
+  - function name original
+  - function name new
+  
+preferred name: rename variable
+other common names: rename constant
+attributes:
+  - variable name original
+  - variable name new
+  
 """
 
 def test_recognize_rename_one_variable():
