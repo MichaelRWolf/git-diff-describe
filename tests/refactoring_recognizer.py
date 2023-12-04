@@ -25,7 +25,7 @@ class RefactoringRecognizer:
         # stdout = result.stdout
         # stderr = result.stderr
         # returncode = result.returncode
-        return self.gpt_result.stdout
+        # return self.gpt_result.stdout
 
     # # Now you can print them out or process them further
     # print("stdout:", stdout)
