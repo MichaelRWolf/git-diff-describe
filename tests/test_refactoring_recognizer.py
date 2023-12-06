@@ -125,23 +125,8 @@ def test_recognize_rename_one_variable():
 
 
 def test_recognize_rename_three_variables():
-    diff_output = """
---- tests/diffs/lwh_original.py	2023-12-03 18:36:26
-+++ tests/diffs/lwh_rename_three_variables.py	2023-12-03 19:09:18
-@@ -3,8 +3,8 @@
-     return value
- 
- def main():
--    l = 3
--    w = 4
--    h = 5
--    vol = fn(l, w, h)
-+    length = 3
-+    width = 4
-+    height = 5
-+    vol = fn(length, width, height)
-     print vol
-"""
+    diff_output = return_diff_u_r("tests/diffs/lwh_original.py",
+                                  "tests/diffs/lwh_rename_three_variables.py")
     output = run_recognizer(diff_output)
     verify(output)
 
