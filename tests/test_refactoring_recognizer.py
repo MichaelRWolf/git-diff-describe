@@ -118,7 +118,8 @@ def return_diff_u_r(filename1, filename2):
 
 
 def test_recognize_rename_one_variable():
-    diff_output = return_diff_u_r("tests/diffs/lwh_original.py", "tests/diffs/lwh_rename_one_variable.py")
+    diff_output = return_diff_u_r("tests/diffs/lwh_original.py",
+                                  "tests/diffs/lwh_rename_one_variable.py")
     output = run_recognizer(diff_output)
     verify(output)
 
