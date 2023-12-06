@@ -4,6 +4,8 @@ from approvaltests import verify
 # Import your RefactoringRecognizer class. Update the path as appropriate
 from refactoring_recognizer import RefactoringRecognizer
 
+import subprocess
+
 
 def canonical_json_string(non_canonical_string):
     # Convert the Python dictionary to a canonical JSON string with sorted keys
@@ -102,6 +104,14 @@ def run_recognizer(diff_output):
     return output
 
 
+def return_diff_u_r(filename1, filename2):
+    command = ['diff', '-u', '-r', filename1, filename2]
+    result = subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE,
+                            text=True,
+                            check=False)
+    return result.stdout
+
+
 def test_recognize_rename_one_variable():
     diff_output = """
     --- tests/diffs/lwh_original.py	2023-12-03 18:36:26
@@ -152,3 +162,8 @@ def test_recognize_rename_method():
     """
     output = run_recognizer(diff_output)
     verify(output)
+
+
+def test_file_differ_for_rename_one_variable():
+    diff_output = return_diff_u_r("diffs/lwh_original.py", "diffs/lwh_rename_one_variable.py")
+    verify(diff_output)
