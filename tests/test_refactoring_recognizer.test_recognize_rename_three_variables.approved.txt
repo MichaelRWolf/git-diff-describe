@@ -113,11 +113,16 @@ Provide additional attributes if you think they are necessary.
   alternate_names:
     - Replace Conditional with Inheritance
 
-# Format
-Output YAML format.  
-  - Do output quotes around values when they quotes not required.
-  - Never put blank or empty lines between items in an array (or list).
-  - Even if there is only one refactoring, output it as a list (with ohly one element).
+# Format  
+Generate YAML output for refactoring actions. 
+Ensure that string values are enclosed in double quotes only when necessary. 
+Avoid adding optional quotes.
+
+Example:
+- refactoring_name: Rename Variable
+  original_name: vol
+  new_name: volume
+
 
 For each refactoring, output these fields.
  - refactoring_name - Use the preferred name, not alternate names

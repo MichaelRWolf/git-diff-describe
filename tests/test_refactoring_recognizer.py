@@ -72,11 +72,16 @@ Provide additional attributes if you think they are necessary.
   alternate_names:
     - Replace Conditional with Inheritance
 
-# Format
-Output YAML format.  
-  - Do output quotes around values when they quotes not required.
-  - Never put blank or empty lines between items in an array (or list).
-  - Even if there is only one refactoring, output it as a list (with ohly one element).
+# Format  
+Generate YAML output for refactoring actions. 
+Ensure that string values are enclosed in double quotes only when necessary. 
+Avoid adding optional quotes.
+
+Example:
+- refactoring_name: Rename Variable
+  original_name: vol
+  new_name: volume
+
 
 For each refactoring, output these fields.
  - refactoring_name - Use the preferred name, not alternate names
@@ -113,18 +118,7 @@ def return_diff_u_r(filename1, filename2):
 
 
 def test_recognize_rename_one_variable():
-    diff_output = """
-    --- tests/diffs/lwh_original.py	2023-12-03 18:36:26
-+++ tests/diffs/lwh_rename_one_variable.py	2023-12-03 18:37:47
-@@ -6,5 +6,5 @@
-     l = 3
-     w = 4
-     h = 5
--    vol = fn(l, w, h)
--    print vol
-+    volume = fn(l, w, h)
-+    print volume
-"""
+    diff_output = return_diff_u_r("tests/diffs/lwh_original.py", "tests/diffs/lwh_rename_one_variable.py")
     output = run_recognizer(diff_output)
     verify(output)
 
@@ -165,5 +159,5 @@ def test_recognize_rename_method():
 
 
 def test_file_differ_for_rename_one_variable():
-    diff_output = return_diff_u_r("diffs/lwh_original.py", "diffs/lwh_rename_one_variable.py")
+    diff_output = return_diff_u_r("tests/diffs/lwh_original.py", "tests/diffs/lwh_rename_one_variable.py")
     verify(diff_output)
