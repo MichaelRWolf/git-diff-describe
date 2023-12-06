@@ -1,13 +1,15 @@
 # commit-message-generator
 
-# WIP
-- pass OPENAI_API_KEY to... (PyCharm, pytest, PyCharm/pytest, other?)
+# Work Plan
 
-# TODO
+## WIP
+
+## TODO
+- pass OPENAI_API_KEY to... (PyCharm, pytest, PyCharm/pytest, other?)
 - tests run from PyCharm, not just command line (after)
-- create_diff_string(original_text, current_text)
-- create_validation_string(diff_string, prompt)
+- new create_diff_string(original_text, current_text)
 - output ALL info in YAML (so that it can be passed directly to generate-commit-message)
 
-# DONE
+## DONE
+- refactor to run_recognizer(diff_string)
 - add stdout to validation string

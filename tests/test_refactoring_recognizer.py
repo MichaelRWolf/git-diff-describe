@@ -86,7 +86,6 @@ For each refactoring, output these fields.
 
 
 def test_recognize_rename_one_variable():
-    recognizer = RefactoringRecognizer()
     diff_output = """
     --- tests/diffs/lwh_original.py	2023-12-03 18:36:26
 +++ tests/diffs/lwh_rename_one_variable.py	2023-12-03 18:37:47
@@ -99,27 +98,25 @@ def test_recognize_rename_one_variable():
 +    volume = fn(l, w, h)
 +    print volume
 """
+    output = run_recognizer(diff_output)
+    verify(output)
+
+
+def run_recognizer(diff_output):
+    recognizer = RefactoringRecognizer()
     recognizer.add_task(refactoring_task_description)
     recognizer.add_diff(diff_output)
-
     output = ""
-
     recognizer.chatGPT_prompt_and_return()
-
     output += "# subprocess\n"
     output += recognizer.subprocess_info()
-
     output += "\n\n"
-
     output += "# Result\n"
     output += str(recognizer.analysis())
-
     output += "\n\n"
-
     output += "# __str__\n"
     output += str(recognizer)
-
-    verify(output)
+    return output
 
 
 def test_recognize_rename_three_variables():
