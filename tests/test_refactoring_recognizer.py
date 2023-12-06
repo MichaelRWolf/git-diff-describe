@@ -116,10 +116,15 @@ For each refactoring, output these fields.
      Simply place the attributes at the same level as 'refactoring_name'.
  - [other] - if you feel that other information would be necessary to categorize the refactoring
 """
-pattern = r'\s+(?=\n)'
-#2 Define a regular expression pattern to match trailing whitespace before a newline on lines with non-whitespace characters
-pattern = r'(?<=\S)\s+(?=\n)'
-#3 Define a regular expression pattern to match trailing whitespace before a newline on lines with non-whitespace characters
+# 1
+# pattern = r'\s+(?=\n)'
+
+# 2 Define a regular expression pattern to match trailing whitespace before a newline
+# on lines with non-whitespace characters
+# pattern = r'(?<=\S)\s+(?=\n)'
+
+# 3 Define a regular expression pattern to match trailing whitespace before a newline
+# on lines with non-whitespace characters
 pattern = r'(?<=\S)([ \t]+)(?=\n)'
 refactoring_task_description = re.sub(pattern, '', refactoring_task_description)
 
