@@ -13,3 +13,4 @@
 ## DONE
 - refactor to run_recognizer(diff_string)
 - add stdout to validation string
+- add a .gitignore for .idea, `__pycache__`, etc.
