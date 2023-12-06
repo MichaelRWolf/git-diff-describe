@@ -85,23 +85,6 @@ For each refactoring, output these fields.
 """
 
 
-def test_recognize_rename_one_variable():
-    diff_output = """
-    --- tests/diffs/lwh_original.py	2023-12-03 18:36:26
-+++ tests/diffs/lwh_rename_one_variable.py	2023-12-03 18:37:47
-@@ -6,5 +6,5 @@
-     l = 3
-     w = 4
-     h = 5
--    vol = fn(l, w, h)
--    print vol
-+    volume = fn(l, w, h)
-+    print volume
-"""
-    output = run_recognizer(diff_output)
-    verify(output)
-
-
 def run_recognizer(diff_output):
     recognizer = RefactoringRecognizer()
     recognizer.add_task(refactoring_task_description)
@@ -119,8 +102,24 @@ def run_recognizer(diff_output):
     return output
 
 
+def test_recognize_rename_one_variable():
+    diff_output = """
+    --- tests/diffs/lwh_original.py	2023-12-03 18:36:26
++++ tests/diffs/lwh_rename_one_variable.py	2023-12-03 18:37:47
+@@ -6,5 +6,5 @@
+     l = 3
+     w = 4
+     h = 5
+-    vol = fn(l, w, h)
+-    print vol
++    volume = fn(l, w, h)
++    print volume
+"""
+    output = run_recognizer(diff_output)
+    verify(output)
+
+
 def test_recognize_rename_three_variables():
-    recognizer = RefactoringRecognizer()
     diff_output = """
 --- tests/diffs/lwh_original.py	2023-12-03 18:36:26
 +++ tests/diffs/lwh_rename_three_variables.py	2023-12-03 19:09:18
@@ -138,30 +137,11 @@ def test_recognize_rename_three_variables():
 +    vol = fn(length, width, height)
      print vol
 """
-    recognizer.add_task(refactoring_task_description)
-    recognizer.add_diff(diff_output)
-
-    output = ""
-
-    recognizer.chatGPT_prompt_and_return()
-
-    output += "# subprocess\n"
-    output += recognizer.subprocess_info()
-
-    output += "\n\n"
-    output += "# Result\n"
-    output += canonical_json_string(recognizer.analysis())
-
-    output += "\n\n"
-
-    output += "# __str__\n"
-    output += str(recognizer)
-
+    output = run_recognizer(diff_output)
     verify(output)
 
 
 def test_recognize_rename_method():
-    recognizer = RefactoringRecognizer()
     diff_output = """
     --- a/original_file.py
     +++ b/updated_file.py
@@ -170,25 +150,5 @@ def test_recognize_rename_method():
     +def some_renamed_function():
          pass
     """
-
-    recognizer.add_task(refactoring_task_description)
-    recognizer.add_diff(diff_output)
-
-    output = ""
-
-    recognizer.chatGPT_prompt_and_return()
-
-    output += "# subprocess\n"
-    output += recognizer.subprocess_info()
-
-    output += "\n\n"
-
-    output += "# Result\n"
-    output += canonical_json_string(recognizer.analysis())
-
-    output += "\n\n"
-
-    output += "# __str__\n"
-    output += str(recognizer)
-
+    output = run_recognizer(diff_output)
     verify(output)
