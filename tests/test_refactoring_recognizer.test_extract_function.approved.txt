@@ -2,6 +2,7 @@
 stdout
 - refactoring_name: Extract Method
   new_name: fn
+- other_changes: The `main` function now calls the `fn` function, passing `l`, `w`, and `h` as arguments to calculate `vol`, instead of calculating `vol` directly within `main`.
 
 
 stderr
@@ -14,12 +15,13 @@ returncode
 # Result
 - refactoring_name: Extract Method
   new_name: fn
+- other_changes: The `main` function now calls the `fn` function, passing `l`, `w`, and `h` as arguments to calculate `vol`, instead of calculating `vol` directly within `main`.
 
 
 # __str__
 # Diff output
---- tests/diffs/lwh_pre_extract_function.py	2023-12-05 19:52:30
-+++ tests/diffs/lwh_original.py	2023-12-03 18:36:26
+--- diffs/lwh_pre_extract_function.py	2024-01-08 16:59:28
++++ diffs/lwh_original.py	2024-01-08 16:59:28
 @@ -1,6 +1,10 @@
 +def fn(d1, d2, d3):
 +    value = d1 * d2 * d3
@@ -136,3 +138,10 @@ For each refactoring, output these fields.
      Simply place the attributes at the same level as 'refactoring_name'.
  - [other] - if you feel that other information would be necessary to categorize the refactoring
 
+If you notice changes that are not refactorings, please describe the changes in the output structure with key 'other changes'.
+
+Do NOT return YAML in a code block.
+
+If you notice changes that are not refactorings, please describe the changes in the output structure with key 'other changes'.
+
+Do NOT return YAML in a code block.

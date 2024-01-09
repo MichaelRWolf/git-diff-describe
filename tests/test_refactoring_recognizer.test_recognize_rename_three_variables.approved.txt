@@ -36,7 +36,7 @@ returncode
 +++ diffs/lwh_rename_three_variables.py	2024-01-08 16:59:28
 @@ -3,8 +3,8 @@
      return value
- 
+
  def main():
 -    l = 3
 -    w = 4
@@ -151,3 +151,10 @@ For each refactoring, output these fields.
      Simply place the attributes at the same level as 'refactoring_name'.
  - [other] - if you feel that other information would be necessary to categorize the refactoring
 
+If you notice changes that are not refactorings, please describe the changes in the output structure with key 'other changes'.
+
+Do NOT return YAML in a code block.
+
+If you notice changes that are not refactorings, please describe the changes in the output structure with key 'other changes'.
+
+Do NOT return YAML in a code block.
