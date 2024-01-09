@@ -1,5 +1,32 @@
 # commit-message-generator
 
+To make it useful to the Thursday group
+
+
+To make it work as a developer
+- in environment
+  - OPENAI_API_KEY into environment
+    - . ~/.openairc
+- Executables on `PATH`
+  - `refactoring_recognizer.py`
+  - `ChatGPT-CLI`
+
+
+
+What's needed to run
+  recognizer....py is on path and executable
+  chatGPT-CLI is be used by recognizer
+
+
+
+# How To Run
+
+
+Make sure 'chatGPT-CLI' is on path.
+
+Assure that key is in environment.
+
+
 # Work Plan
 
 ## WIP

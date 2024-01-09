@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-
+import os
 import subprocess
 import sys
 
@@ -82,6 +82,7 @@ For each refactoring, output these fields.
 
 class RefactoringRecognizer:
     def __init__(self):
+        self.task = None
         self.gpt_result = None
         self.diff_output = None
 
@@ -99,19 +100,34 @@ class RefactoringRecognizer:
 
     def subprocess_info(self):
         info = ""
+
         info += "stdout\n" + self.gpt_result.stdout
         info += "\n\n"
+
         info += "stderr\n" + self.gpt_result.stderr
         info += "\n\n"
+
         info += "returncode\n" + str(self.gpt_result.returncode)
         info += "\n"
+
         return info
 
-    def chatGPT_prompt_and_return(self):
+    @staticmethod
+    def create_custom_env():
+        custom_env = os.environ.copy()
+        secret = fetch_openai_api_key()
+        custom_env['OPENAI_API_KEY'] = secret
+        return custom_env
+
+    def chatgpt_prompt_and_return(self):
         prompt = self.assemble_prompt()
 
         command = ["chatGPT-CLI", prompt]
-        self.gpt_result = subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+        self.gpt_result = subprocess.run(command,
+                                         stdout=subprocess.PIPE,
+                                         stderr=subprocess.PIPE,
+                                         text=True,
+                                         env=self.create_custom_env())
         # stdout = result.stdout
         # stderr = result.stderr
         # returncode = result.returncode
@@ -132,6 +148,27 @@ class RefactoringRecognizer:
         return self.__str__()
 
 
+def fetch_openai_api_key():
+    try:
+        result = subprocess.run(
+            [
+                'security', 'find-generic-password',
+                '-a', os.environ.get('USER'),
+                '-s', 'OPENAI_API_KEY',
+                '-w'
+            ],
+            capture_output=True,
+            text=True,
+            check=True
+        )
+        # Returning the stdout
+        return result.stdout.strip()
+    except subprocess.CalledProcessError as e:
+        # Handle errors if the subprocess fails
+        print(f"Error occurred: {e}")
+        return None
+
+
 def main():
     git_diff_u_r_string = sys.stdin.read()
     print(git_diff_u_r_string)
@@ -141,10 +178,9 @@ def main():
     recognizer.add_task(refactoring_task_description)
     recognizer.add_diff(git_diff_u_r_string)
 
-    recognizer.chatGPT_prompt_and_return()
+    recognizer.chatgpt_prompt_and_return()
 
     print(recognizer.subprocess_info())
-
     print(recognizer.analysis())
 
 

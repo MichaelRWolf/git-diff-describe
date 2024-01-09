@@ -1,10 +1,10 @@
 # test_refactoring_recognizer.py
+import os
 import re
 import subprocess
 
 from approvaltests import verify
 
-# Import your RefactoringRecognizer class. Update the path as appropriate
 from refactoring_recognizer import RefactoringRecognizer
 
 
@@ -134,19 +134,27 @@ def run_recognizer(diff_output):
     recognizer.add_task(refactoring_task_description)
     recognizer.add_diff(diff_output)
     output = ""
-    recognizer.chatGPT_prompt_and_return()
+
+    recognizer.chatgpt_prompt_and_return()
+
     output += "# subprocess\n"
     output += recognizer.subprocess_info()
     output += "\n\n"
+
     output += "# Result\n"
     output += str(recognizer.analysis())
     output += "\n\n"
+
     output += "# __str__\n"
     output += str(recognizer)
     return output
 
 
 def return_diff_u_r(filename1, filename2):
+    for filename in [filename1, filename2]:
+        if not os.path.isfile(filename) or not os.access(filename, os.R_OK):
+            raise FileNotFoundError(f"File not found or not readable: {filename}")
+
     command = ['diff', '-u', '-r', filename1, filename2]
     result = subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE,
                             text=True,
@@ -154,16 +162,27 @@ def return_diff_u_r(filename1, filename2):
     return result.stdout
 
 
+# def load_openai_env():
+#     openai_api_key = os.environ.get('OPENAI_API_KEY')
+#     print(f"OPENAI_API_KEY: {openai_api_key}")
+#
+#     custom_env_path = os.path.expanduser('~/.openairc')
+#     load_dotenv(dotenv_path=custom_env_path)
+#
+#     openai_api_key = os.environ.get('OPENAI_API_KEY')
+#     print(f"OPENAI_API_KEY: {openai_api_key}")
+
+
 def test_recognize_rename_one_variable():
-    diff_output = return_diff_u_r("tests/diffs/lwh_original.py",
-                                  "tests/diffs/lwh_rename_one_variable.py")
+    diff_output = return_diff_u_r("diffs/lwh_original.py",
+                                  "diffs/lwh_rename_one_variable.py")
     output = run_recognizer(diff_output)
     verify(output)
 
 
 def test_recognize_rename_three_variables():
-    diff_output = return_diff_u_r("tests/diffs/lwh_original.py",
-                                  "tests/diffs/lwh_rename_three_variables.py")
+    diff_output = return_diff_u_r("diffs/lwh_original.py",
+                                  "diffs/lwh_rename_three_variables.py")
     output = run_recognizer(diff_output)
     verify(output)
 
@@ -183,7 +202,7 @@ def test_recognize_rename_method():
     -def some_function():
     +def some_renamed_function():
          pass
-    """
+"""
     output = run_recognizer(diff_output)
     verify(output)
 
@@ -195,6 +214,6 @@ def test_hello():
 
 
 def test_file_differ_for_rename_one_variable():
-    diff_output = return_diff_u_r("tests/diffs/lwh_original.py",
-                                  "tests/diffs/lwh_rename_one_variable.py")
+    diff_output = return_diff_u_r("diffs/lwh_original.py",
+                                  "diffs/lwh_rename_one_variable.py")
     verify(diff_output)
