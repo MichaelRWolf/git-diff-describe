@@ -77,9 +77,6 @@ read -r -d '' PAYLOAD <<-EOM
 }
 EOM
 
-openai_rc_filename="${HOME}/.openairc"
-[[ -f "${openai_rc_file}" && -r _ ]] && . "${openai_rc_file}"
-
 # call the openai api
 RESPONSE=$(curl -sS "$API_URL" \
   -H "Content-Type: application/json" \
