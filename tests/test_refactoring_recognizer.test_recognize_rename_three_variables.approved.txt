@@ -1,6 +1,6 @@
 # subprocess
 stdout
-q- refactoring_name: Rename Variable
+- refactoring_name: Rename Variable
   original_name: l
   new_name: length
 - refactoring_name: Rename Variable
@@ -32,8 +32,8 @@ returncode
 
 # __str__
 # Diff output
---- tests/diffs/lwh_original.py	2023-12-03 18:36:26
-+++ tests/diffs/lwh_rename_three_variables.py	2023-12-03 19:09:18
+--- diffs/lwh_original.py	2024-01-08 16:59:28
++++ diffs/lwh_rename_three_variables.py	2024-01-08 16:59:28
 @@ -3,8 +3,8 @@
      return value
  
