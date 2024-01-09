@@ -2,3 +2,4 @@ __pycache__/
 *.received.*
 .idea
 diff_generation_files/
+sandbox/
