@@ -218,6 +218,7 @@ def verify_with_scrubber(text):
     text = whitespace_scrubber(text)
     verify(text)
 
+
 import unittest
 
 
@@ -227,17 +228,17 @@ class TestRefactoringRecognizer(unittest.TestCase):
         scrubbed_text = whitespace_scrubber(text)
         expected_text = "top\n\nbottom"
         self.assertEqual(scrubbed_text, expected_text)
+
     def test_hello(self):
         # verify("Hello", options=Options().with_reporter(report_with_beyond_compare()))
         # verify("Hello", reporter=DiffReporter())
         verify_with_scrubber("Hello")
 
-
-def test_recognize_rename_one_variable():
-    diff_output = return_diff_u_r("diffs/lwh_original.py",
-                                  "diffs/lwh_rename_one_variable.py")
-    output = run_recognizer(diff_output)
-    verify_with_scrubber(output)
+    def test_recognize_rename_one_variable(self):
+        diff_output = return_diff_u_r("diffs/lwh_original.py",
+                                      "diffs/lwh_rename_one_variable.py")
+        output = run_recognizer(diff_output)
+        verify_with_scrubber(output)
 
 
 def test_recognize_rename_three_variables():
@@ -265,8 +266,6 @@ def test_recognize_rename_method():
 """
     output = run_recognizer(diff_output)
     verify_with_scrubber(output)
-
-
 
 
 def test_file_differ_for_rename_one_variable():
