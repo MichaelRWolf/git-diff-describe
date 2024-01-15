@@ -221,7 +221,7 @@ def verify_with_scrubber(text):
 import unittest
 
 
-class TestStuff(unittest.TestCase):
+class TestRefactoringRecognizer(unittest.TestCase):
     def test_whitespace_scrubber(self):
         text = "top\n \nbottom\n"
         scrubbed_text = whitespace_scrubber(text)
