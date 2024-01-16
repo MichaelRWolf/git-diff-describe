@@ -234,7 +234,7 @@ class TestRefactoringRecognizer(unittest.TestCase):
         # verify("Hello", reporter=DiffReporter())
         verify_with_scrubber("Hello")
 
-    def test_create_recognizer_throws_error_on_empty_diff(self):
+    def test_recognizer_throws_value_error_on_empty_diff(self):
         with self.assertRaises(ValueError):
             RefactoringRecognizer().add_diff("")
 
