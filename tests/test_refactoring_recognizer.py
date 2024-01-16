@@ -234,6 +234,10 @@ class TestRefactoringRecognizer(unittest.TestCase):
         # verify("Hello", reporter=DiffReporter())
         verify_with_scrubber("Hello")
 
+    def test_create_recognizer_throws_error_on_empty_diff(self):
+        with self.assertRaises(ValueError):
+            RefactoringRecognizer().add_diff("")
+
     def test_recognize_rename_one_variable(self):
         diff_output = return_diff_u_r("diffs/lwh_original.py",
                                       "diffs/lwh_rename_one_variable.py")
