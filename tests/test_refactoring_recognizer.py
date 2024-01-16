@@ -256,15 +256,14 @@ class TestRefactoringRecognizer(unittest.TestCase):
         output = run_recognizer(diff_output)
         verify_with_scrubber(output)
 
-
     def test_recognize_rename_method(self):
         diff_output = """
-        --- a/original_file.py
-        +++ b/updated_file.py
-        @@ -1,4 +1,4 @@
-        -def some_function():
-        +def some_renamed_function():
-             pass
+    --- a/original_file.py
+    +++ b/updated_file.py
+    @@ -1,4 +1,4 @@
+    -def some_function():
+    +def some_renamed_function():
+         pass
     """
         output = run_recognizer(diff_output)
         verify_with_scrubber(output)

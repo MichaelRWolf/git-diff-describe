@@ -138,4 +138,3 @@ Do NOT return YAML in a code block.
 If you notice changes that are not refactorings, please describe the changes in the output structure with key 'other changes'.
 
 Do NOT return YAML in a code block.
-
