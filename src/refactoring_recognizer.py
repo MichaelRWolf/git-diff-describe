@@ -20,6 +20,14 @@ When you report a refactoring, use 'preferred name' below instead of one of the 
 
 Further describe the refactoring by providing the attributes listed for each refactoring.
 
+For these attributes, provide both if they are different, otherwise suppress both.
+- original_class
+- new_class
+
+For these attributes, provide both (relative to project root) if they are different, otherwise suppress both.
+- original_filename
+- new_filename
+
 Provide additional attributes if you think they are necessary.
 
 - preferred_name: Rename Variable
