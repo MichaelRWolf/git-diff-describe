@@ -24,7 +24,7 @@ For these attributes, provide both if they are different, otherwise suppress bot
 - original_class
 - new_class
 
-For these attributes, provide both (relative to project root) if they are different, otherwise suppress both.
+For these attributes, provide both if they are different, otherwise suppress both.
 - original_filename
 - new_filename
 

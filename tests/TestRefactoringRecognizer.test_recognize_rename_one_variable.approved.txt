@@ -51,11 +51,11 @@ When you report a refactoring, use 'preferred name' below instead of one of the 
 
 Further describe the refactoring by providing the attributes listed for each refactoring.
 
-If an identifier's class changes, provide these attributes:
+For these attributes, provide both if they are different, otherwise suppress both.
 - original_class
 - new_class
 
-If code is moved to a different file, provide these attributes with paths relative to the project root:
+For these attributes, provide both if they are different, otherwise suppress both.
 - original_filename
 - new_filename
 
