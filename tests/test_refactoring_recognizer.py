@@ -1,6 +1,8 @@
 # test_refactoring_recognizer.py
 import os
 import subprocess
+import unittest
+
 from approvaltests import verify
 
 from src.refactoring_recognizer import RefactoringRecognizer
@@ -217,9 +219,6 @@ def whitespace_scrubber(text):
 def verify_with_scrubber(text):
     text = whitespace_scrubber(text)
     verify(text)
-
-
-import unittest
 
 
 class TestRefactoringRecognizer(unittest.TestCase):
