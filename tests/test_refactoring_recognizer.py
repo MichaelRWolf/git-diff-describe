@@ -244,7 +244,6 @@ class TestRefactoringRecognizer(unittest.TestCase):
         output = run_recognizer(diff_output)
         verify_with_scrubber(output)
 
-
     def test_recognize_rename_three_variables(self):
         diff_output = return_diff_u_r("diffs/lwh_original.py",
                                       "diffs/lwh_rename_three_variables.py")
