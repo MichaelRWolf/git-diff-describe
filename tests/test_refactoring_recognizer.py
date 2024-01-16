@@ -250,12 +250,11 @@ class TestRefactoringRecognizer(unittest.TestCase):
         output = run_recognizer(diff_output)
         verify_with_scrubber(output)
 
-
-def test_extract_function():
-    diff_output = return_diff_u_r("diffs/lwh_pre_extract_function.py",
-                                  "diffs/lwh_original.py")
-    output = run_recognizer(diff_output)
-    verify_with_scrubber(output)
+    def test_extract_function(self):
+        diff_output = return_diff_u_r("diffs/lwh_pre_extract_function.py",
+                                      "diffs/lwh_original.py")
+        output = run_recognizer(diff_output)
+        verify_with_scrubber(output)
 
 
 def test_recognize_rename_method():
