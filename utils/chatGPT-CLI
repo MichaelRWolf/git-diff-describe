@@ -14,7 +14,9 @@
 # - ~/.chatrc
 
 function bat_or_cat_stdin {
-    bat "${@}" || cat
+    bat "${@}" 2> /dev/null        ||
+        batcat "${@}" 2> /dev/null ||
+	cat
 }
 
 MODEL="gpt-4-1106-preview"
