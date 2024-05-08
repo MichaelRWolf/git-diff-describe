@@ -3,3 +3,8 @@ __pycache__/
 .idea/**
 diff_generation_files/
 sandbox/
+google_apps_script/node_modules/**
+package-lock.json
+build/**
+
+
