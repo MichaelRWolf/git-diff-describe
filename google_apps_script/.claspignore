@@ -1,0 +1,13 @@
+.git/**
+.npm-packages/**
+node_modules/**
+test/**
+
+// Let TillerMoney.ts replace Transaction.ts and Transfer.ts
+Transaction.ts
+Transfer.ts
+
+
+// Do _NOT_ push _transpiled_ files - *.js files in dist/ directory.
+// GAS expects *.ts, which it renames to *.gs, from main directory.
+dist/**

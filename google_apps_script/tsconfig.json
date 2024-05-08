@@ -1,0 +1,9 @@
+// skipLibCheck line added - See https://www.angularfix.com/2021/12/typescript-error-ts2403-subsequent.html
+{
+  "compilerOptions": {
+    "noImplicitAny": true,
+    "module": "commonjs",
+    "outDir": "dist",
+    // "skipLibCheck": true,  // https://www.typescriptlang.org/tsconfig#skipLibCheck
+  }
+}
