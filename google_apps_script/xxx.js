@@ -20,8 +20,8 @@ function __unused_fetchCommitsToSheet(repoUrl, branchName) {
 
 
 var commonHeaders = {
-  "User-Agent":    "Google Apps Script",
-  "Authorization": "Bearer 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"
+  "User-Agent": "Google Apps Script",
+  "Authorization": "Bearer " + process.env.GITHUB_PAT
 };
 
 
