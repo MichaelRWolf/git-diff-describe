@@ -42,19 +42,21 @@ RUN apt-get update && apt-get install -y jq
 
 # TODO
 # - Set up docker account mrw////....
-#   Find free one.
+#   Find free one. Get login.
+#   `docker login user password`  pseudocode
 #
 # `docker tag mrw/com...:latest mrw/comm..:1`
 
-# - Publish this
+# - I publish this
 # - `docker push mrw/commit-message-generator:1`
 # - `docker push mrw/commit-message-generator:latest`
 
-
+# - User installs/gets this
+# - `docker pull mrw:\commi:latest`
+# - `git diff | docker ....`
 
 # TODL
 # Change "/" to ":" in mrw/... as naming.  Image names vs Container name.
-
 
 
 
