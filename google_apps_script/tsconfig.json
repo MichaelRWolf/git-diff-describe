@@ -4,6 +4,12 @@
     "noImplicitAny": true,
     "module": "commonjs",
     "outDir": "dist",
+    "types": ["google-apps-script"]
     // "skipLibCheck": true,  // https://www.typescriptlang.org/tsconfig#skipLibCheck
-  }
+  },
+
+  "include": [
+    // "src/**/*.ts"
+    "*.ts"
+  ]
 }
