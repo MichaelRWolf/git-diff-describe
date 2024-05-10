@@ -22,8 +22,6 @@ function __unused_fetchCommitsToSheet(repoUrl, branchName) {
 
 PropertiesService.getScriptProperties().setProperty("S_PAT", "42");
 PropertiesService.getUserProperties().setProperty("U_PAT", "43");
-var gitHubPat = "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";
-
 function getGitHubPat() {
     return PropertiesService.getScriptProperties().getProperty("GITHUB_PAT");
 }
