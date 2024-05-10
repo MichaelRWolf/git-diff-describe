@@ -1,19 +1,15 @@
 {
-  "name": "google_apps_script",
+  "name": "mendercon_demo",
   "version": "1.0.0",
   "description": "",
   "main": "github-helpers.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "punycode": "^2.3.1",
-    "url": "^0.11.3"
-  },
-  "devDependencies": {
-    "@types/google-apps-script": "^1.0.83"
+    "clasp": "^1.0.0",
+    "url-parse": "^1.5.10"
   }
 }
