@@ -1,8 +1,3 @@
-function myFunction() {
-    return "goodness" + ", everlasting";
-}
-
-
 function __unused_fetchCommitsToSheet(repoUrl, branchName) {
   var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
   
@@ -27,16 +22,6 @@ function __unused_fetchCommitsToSheet(repoUrl, branchName) {
 
 PropertiesService.getScriptProperties().setProperty("S_PAT", "42");
 PropertiesService.getUserProperties().setProperty("U_PAT", "43");
-
-function gup(){
-    return PropertiesService.getUserProperties().getProperty("U_PAT"); 
-}
-
-
-function gsp(){
-    return      PropertiesService.getScriptProperties().getProperty("S_PAT"); 
-}
-
 var gitHubPat = "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";
 
 function getGitHubPat() {
