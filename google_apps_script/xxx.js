@@ -1,12 +1,12 @@
 function __unused_fetchCommitsToSheet(repoUrl, branchName) {
-  var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
-  
-  var apiUrl = repoUrl.replace("github.com", "api.github.com/repos") + "/commits?sha=" + branchName;
-  var response = UrlFetchApp.fetch(apiUrl);
-  var commits = JSON.parse(response.getContentText());
-  
-  var shaColumn = [];
-  for (var i = 0; i < commits.length; i++) {
+  const sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+
+  const apiUrl = repoUrl.replace("github.com", "api.github.com/repos") + "/commits?sha=" + branchName;
+  const response = UrlFetchApp.fetch(apiUrl);
+  const commits = JSON.parse(response.getContentText());
+
+  let shaColumn = [];
+  for (let i = 0; i < commits.length; i++) {
     shaColumn.push([commits[i].sha]);
   }
   
@@ -25,29 +25,30 @@ PropertiesService.getUserProperties().setProperty("U_PAT", "43");
 function getGitHubPat() {
     return PropertiesService.getScriptProperties().getProperty("GITHUB_PAT");
 }
-var commonHeaders = {
-    "User-Agent": "Google Apps Script",
-    "Authorization": "Bearer " + getGitHubPat()
+
+const commonHeaders = {
+  "User-Agent": "Google Apps Script",
+  "Authorization": "Bearer " + getGitHubPat()
 };
 
 
 function getApiUrlFromRepoUrl(repoUrl) {
-  apiUrl = repoUrl.replace("github.com", "api.github.com/repos");
+  const apiUrl = repoUrl.replace("github.com", "api.github.com/repos");
   return apiUrl;
 }
 
 // Looking for format like this
 //     https://api.github.com/repos/MichaelRWolf/pythonic-sound-off-machine/commits/b17c47c16a05fe34da4bd063fbe1bb14f756175d
 function getCommitUrl(repoUrl, sha) {
-  var apiUrl = getApiUrlFromRepoUrl(repoUrl);
+  const apiUrl = getApiUrlFromRepoUrl(repoUrl);
   return apiUrl + "/commits/" + sha;
 }
 
 
 function getCommitHtmlUrl(repoUrl, sha) {
-  var apiUrl = getCommitUrl(repoUrl, sha)
-  var response = UrlFetchApp.fetch(apiUrl, {  headers: commonHeaders });
-  var commitData = JSON.parse(response.getContentText());
+  const apiUrl = getCommitUrl(repoUrl, sha);
+  const response = UrlFetchApp.fetch(apiUrl, {headers: commonHeaders});
+  const commitData = JSON.parse(response.getContentText());
   return commitData.html_url
 }
 
@@ -55,21 +56,21 @@ function getCommitHtmlUrl(repoUrl, sha) {
 // BROKEN!!!
 // TODO - See why GET endpoint works differently
 function getCommitDiffDirectly(repoUrl, sha) {
-  var apiUrl = getCommitUrl(repoUrl, sha);
-  var diffUrl = apiUrl + "/diff";  
-  var response = UrlFetchApp.fetch(diffUrl, { headers: commonHeaders });
+  const apiUrl = getCommitUrl(repoUrl, sha);
+  const diffUrl = apiUrl + "/diff";
+  const response = UrlFetchApp.fetch(diffUrl, {headers: commonHeaders});
   return response.getContentText();
 }
 
 
 function getCommitDiff(repoUrl, sha) {
-  var apiUrl = getCommitUrl(repoUrl, sha)
-  var response = UrlFetchApp.fetch(apiUrl, {  headers: commonHeaders });
-  var commitData = JSON.parse(response.getContentText());
-  
+  const apiUrl = getCommitUrl(repoUrl, sha);
+  const response = UrlFetchApp.fetch(apiUrl, {headers: commonHeaders});
+  const commitData = JSON.parse(response.getContentText());
+
   // Initialize an empty string to store the diff
-  var diffText = "";
-  
+  let diffText = "";
+
   // Iterate through the files array and concatenate the patch strings
   commitData.files.forEach(function(file) {
     diffText += file.patch + "\n"; // Add newline after each patch
@@ -80,11 +81,11 @@ function getCommitDiff(repoUrl, sha) {
 
 
 function getCommitDiffBetter(repoUrl, sha) {
-  var apiUrl = getCommitUrl(repoUrl, sha)
-  var response = UrlFetchApp.fetch(apiUrl, {  headers: commonHeaders });
-  var commitData = JSON.parse(response.getContentText());
+  const apiUrl = getCommitUrl(repoUrl, sha);
+  const response = UrlFetchApp.fetch(apiUrl, {headers: commonHeaders});
+  const commitData = JSON.parse(response.getContentText());
 
-  var diffText = "";
+  let diffText = "";
 
   // Iterate through files and construct diff
   commitData.files.forEach(function(file) {
@@ -112,12 +113,12 @@ function getCommitDiffBetter(repoUrl, sha) {
 
 
 function getCommitComment(repoUrl, sha) {
-  var apiUrl = repoUrl.replace("github.com", "api.github.com/repos") + "/commits/" + sha;
-  
+  const apiUrl = repoUrl.replace("github.com", "api.github.com/repos") + "/commits/" + sha;
+
   // Fetch commit information
-  var response = UrlFetchApp.fetch(apiUrl, { headers: commonHeaders });
-  var data = JSON.parse(response.getContentText());
-  
+  const response = UrlFetchApp.fetch(apiUrl, {headers: commonHeaders});
+  const data = JSON.parse(response.getContentText());
+
   // Return commit message
   return data.commit.message;
 }
