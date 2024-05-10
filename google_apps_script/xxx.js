@@ -42,12 +42,6 @@ var gitHubPat = "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";
 function getGitHubPat() {
     return PropertiesService.getScriptProperties().getProperty("GITHUB_PAT");
 }
-
-function fooUser() {
-    return PropertiesService.getUserProperties().getProperty("GITHUB_PAT");
-}
-
-
 var commonHeaders = {
     "User-Agent": "Google Apps Script",
     "Authorization": "Bearer " + getGitHubPat()
