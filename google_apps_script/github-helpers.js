@@ -34,7 +34,8 @@ const commonHeaders = {
 
 
 function getApiUrlFromRepoUrl(repoUrl) {
-    const apiUrl = repoUrl.replace("github.com", "api.github.com/repos");
+    let apiUrl;
+    apiUrl = repoUrl.replace("github.com", "api.github.com/repos");
     return apiUrl;
 }
 
