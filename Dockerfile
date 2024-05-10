@@ -20,7 +20,7 @@ CMD [ "python", "src/refactoring_recognizer.py" ]
 # I am coming in as src/.., but there is no src/../..
 
 
-# RUN apt-get update && apt-get install -y jq 
+RUN apt-get update && apt-get install -y jq
 # RUN apt-get update && apt-get install -y bat
 
 
