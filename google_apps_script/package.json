@@ -2,7 +2,7 @@
   "name": "google_apps_script",
   "version": "1.0.0",
   "description": "",
-  "main": "xxx.js",
+  "main": "github-helpers.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
