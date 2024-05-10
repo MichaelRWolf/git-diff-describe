@@ -31,11 +31,20 @@ Q - Where are User Properties located in IntelliJ on macOS, since they are NOT i
 A - User Properties are located in the IntelliJ Preferences -> Languages & Frameworks -> Google Apps Script -> User
 Properties.
 
+# Dockerfile
+
+Q - Why does removing this line still build the script and let it run,
+but have it produce no output?
+> `RUN apt-get update && apt-get install -y jq`
+
 # README.md
+
+- Create it
 
 
 # LICENSE.txt
-- Create one
+
+- Create it
 
 
 # OPENAI_API_KEY
