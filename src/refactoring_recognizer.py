@@ -223,10 +223,10 @@ def fetch_openai_api_key():
 
 def main():
     git_diff_u_r_string = sys.stdin.read()
-    print("Sending this git-diff to be analyzed..." +
-          "---------------------------------------" +
-          git_diff_u_r_string,
-          file=sys.stdout)
+    # print("Sending this git-diff to be analyzed..." +
+    #       "---------------------------------------" +
+    #       git_diff_u_r_string,
+    #       file=sys.stdout)
 
     recognizer = RefactoringRecognizer()
     recognizer.add_task(refactoring_task_description)
@@ -234,7 +234,7 @@ def main():
 
     recognizer.chatgpt_prompt_and_return()
 
-    print(recognizer.subprocess_info(), file=sys.stdout)
+    # print(recognizer.subprocess_info(), file=sys.stdout) 
     print(recognizer.analysis())
 
 
