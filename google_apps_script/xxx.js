@@ -19,9 +19,38 @@ function __unused_fetchCommitsToSheet(repoUrl, branchName) {
 }
 
 
+// PropertiesService.getScriptProperties().setProperty("GITHUB_PAT", process.env.GITHUB_PAT);
+
+//   "Authorization": "Bearer " + PropertiesService.getScriptProperties().getProperty("GITHUB_PAT")
+//   PropertiesService.getScriptProperties().setProperty(key, value);
+
+
+PropertiesService.getScriptProperties().setProperty("S_PAT", "42");
+PropertiesService.getUserProperties().setProperty("U_PAT", "43");
+
+function gup(){
+    return PropertiesService.getUserProperties().getProperty("U_PAT"); 
+}
+
+
+function gsp(){
+    return      PropertiesService.getScriptProperties().getProperty("S_PAT"); 
+}
+
+var gitHubPat = "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";
+
+function fooScript() {
+    return PropertiesService.getScriptProperties().getProperty("GITHUB_PAT");
+}
+
+function fooUser() {
+    return PropertiesService.getUserProperties().getProperty("GITHUB_PAT");
+}
+
+
 var commonHeaders = {
-  "User-Agent": "Google Apps Script",
-  "Authorization": "Bearer " + process.env.GITHUB_PAT
+    "User-Agent": "Google Apps Script",
+    "Authorization": "Bearer " + fooScript()
 };
 
 
