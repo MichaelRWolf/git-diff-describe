@@ -57,8 +57,7 @@ function getApiUrlFromRepoUrl(repoUrl) {
 //     https://api.github.com/repos/MichaelRWolf/pythonic-sound-off-machine/commits/b17c47c16a05fe34da4bd063fbe1bb14f756175d
 function getCommitUrl(repoUrl, sha) {
   var apiUrl = getApiUrlFromRepoUrl(repoUrl);
-  var commitUrl = apiUrl + "/commits/" + sha;
-  return commitUrl;
+  return apiUrl + "/commits/" + sha;
 }
 
 
@@ -66,8 +65,7 @@ function getCommitHtmlUrl(repoUrl, sha) {
   var apiUrl = getCommitUrl(repoUrl, sha)
   var response = UrlFetchApp.fetch(apiUrl, {  headers: commonHeaders });
   var commitData = JSON.parse(response.getContentText());
-  var htmlUrl = commitData.html_url;
-  return htmlUrl
+  return commitData.html_url
 }
 
 
