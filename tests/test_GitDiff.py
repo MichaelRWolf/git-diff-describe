@@ -8,5 +8,5 @@ from GitDiff import GitDiff
 class TestGitDiff(TestCase):
     def test_describe_empty_object(self):
         obj = GitDiff()
-        result = obj.asTextDescription()
+        result = obj.as_text_description()
         verify(result)
