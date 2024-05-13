@@ -1,5 +1,10 @@
 # commit-message-generator
 
+# Demo Overview
+
+This project is a demonstration of a commit message generator. It uses OpenAI's GPT-3 to generate a commit message based on the changes in a file. The changes are detected using the `difflib` library.
+
+
 # Work Plan
 
 ## WIP
