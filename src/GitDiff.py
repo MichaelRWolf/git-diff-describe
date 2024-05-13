@@ -2,5 +2,5 @@ class GitDiff:
     def __init__(self):
         return
 
-    def asTextDescription(self):
+    def (self):
         return "This description intentionally left blank"
