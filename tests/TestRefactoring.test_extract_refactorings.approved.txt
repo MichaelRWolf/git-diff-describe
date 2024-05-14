@@ -1,0 +1,3 @@
+Extract Variable: new_var
+Extract Function: new_fun
+Extract Method: new_meth

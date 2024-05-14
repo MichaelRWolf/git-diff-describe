@@ -18,13 +18,22 @@ class TestRefactoring(TestCase):
                                       {"original_name": "maxSpd",
                                        "new_name": "speedMax"});
         rename_method = Refactoring("Rename Method",
-                                      {"original_name": "m1",
-                                       "new_name": "mach1"});
+                                    {"original_name": "m1",
+                                     "new_name": "mach1"});
         rename_class = Refactoring("Rename Class",
-                                      {"original_name": "FastCar",
-                                       "new_name": "WayOutOfHere"});
+                                   {"original_name": "FastCar",
+                                    "new_name": "WayOutOfHere"});
 
         value = ''.join(map(lambda obj: str(obj) + '\n',
                             [rename_variable, rename_method, rename_class]))
 
+        verify(value)
+
+    def test_extract_refactorings(self):
+        refactoring_list = [
+            Refactoring("Extract Variable", {"new_name" : "new_var"}),
+            Refactoring("Extract Function", {"new_name": "new_fun"}),
+            Refactoring("Extract Method", {"new_name": "new_meth"})
+        ]
+        value = ''.join(map(lambda obj: str(obj) + '\n', refactoring_list))
         verify(value)
