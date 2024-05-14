@@ -1,2 +1,1 @@
-Rename Variable
-    {'original_name': 'fn', 'new_name': 'file_name'}
+Rename Variable to file_name from fn
