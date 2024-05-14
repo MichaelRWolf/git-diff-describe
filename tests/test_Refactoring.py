@@ -30,11 +30,12 @@ class TestRefactoring(TestCase):
         verify(value)
 
     def test_extract_refactorings(self):
-        refactoring_list = [
-            Refactoring("Extract Variable", {"new_name" : "new_var"}),
+        self.meth_ = [
+            Refactoring("Extract Variable", {"new_name": "new_var"}),
             Refactoring("Extract Function", {"new_name": "new_fun"}),
             Refactoring("Extract Method", {"new_name": "new_meth"}),
         ]
+        refactoring_list = self.meth_
         value = ''.join(map(lambda obj: str(obj) + '\n', refactoring_list))
         verify(value)
 

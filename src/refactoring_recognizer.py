@@ -3,6 +3,7 @@ import os
 import subprocess
 import sys
 
+
 # refactoring_task_description_file_name = '../resources/refactoring_task_description.md'
 # with open(refactoring_task_description_file_name, 'r') as file:
 #     refactoring_task_description = file.read()
@@ -10,9 +11,9 @@ import sys
 def read_task_description():
     current_dir = os.path.dirname(__file__)
     task_description_file_path = os.path.join(current_dir,
-                                         '..',
-                                         'resources',
-                                         'refactoring_task_description.md')
+                                              '..',
+                                              'resources',
+                                              'refactoring_task_description.md')
 
     with open(task_description_file_path, 'r') as file:
         task_description = file.read()
@@ -68,9 +69,9 @@ class RefactoringRecognizer:
 
         current_dir = os.path.dirname(__file__)
         chat_command_path = os.path.join(current_dir,
-                                                  '..',
-                                                  'utils',
-                                                  'chatGPT-CLI')
+                                         '..',
+                                         'utils',
+                                         'chatGPT-CLI')
 
         command = [chat_command_path, prompt]
         custom_env = self.create_custom_env()
@@ -103,35 +104,11 @@ class RefactoringRecognizer:
         return self.__str__()
 
 
-# def fetch_openai_api_key():
-#     result = os.environ.get('OPENAI_API_KEY_git_diff_analyzer')
-#     return result.strip()
-
 def fetch_openai_api_key():
     result = os.environ.get('OPENAI_API_KEY', "")
     if not result:
         raise ValueError("Environment variable 'OPENAI_API_KEY' is not set or empty.")
     return result
-
-#     try:
-#         result = subprocess.run(
-#             [
-#                 'security', 'find-generic-password',
-#                 '-a', os.environ.get('USER'),
-#                 '-s', 'OPENAI_API_KEY_git_diff_analyzer
-# ',
-#                 '-w'
-#             ],
-#             capture_output=True,
-#             text=True,
-#             check=True
-#         )
-# # Returning the stdout
-# return result.stdout.strip()
-# except subprocess.CalledProcessError as e:
-#     # Handle errors if the subprocess fails
-#     print(f"Error occurred: {e}")
-#     return None
 
 
 def main():

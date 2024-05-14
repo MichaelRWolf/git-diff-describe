@@ -29,13 +29,13 @@ RUN apt-get update && apt-get install -y jq
 # Original
 # ARG openaiapikeythingy 
 # ENV OPENAI_API_KEY $openaiapikeythingy 
-# docker build . -t mrw/commit-message-generator --build-arg openaiapikeythingy=$OPENAI_API_KEY_git_diff_analyzer
+# docker build . -t mrw/commit-message-generator --build-arg openaiapikeythingy=$OPENAI_API_KEY
 # git diff | docker run -i  mrw/commit-message-generator
 
 # Newer/cleaner...
 # docker build . -t mrw/commit-message-generator
-# git diff | docker run -i  -e "OPENAI_API_KEY=$OPENAI_API_KEY_git_diff_analyzer" mrw/commit-message-generator
-# docker run -i -t -e "OPENAI_API_KEY=$OPENAI_API_KEY_git_diff_analyzer" mrw/commit-message-generator /bin/bash
+# git diff | docker run -i  -e "OPENAI_API_KEY=$OPENAI_API_KEY" mrw/commit-message-generator
+# docker run -i -t -e "OPENAI_API_KEY=$OPENAI_API_KEY" mrw/commit-message-generator /bin/bash
 # -i interactive stdin<->stdin/
 
 
