@@ -1,0 +1,3 @@
+Rename Variable to speedMax from maxSpeed
+Rename Method to mach1 from m1
+Rename Class to WayOutOfHere from FastCar
