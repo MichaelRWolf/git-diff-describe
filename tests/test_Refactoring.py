@@ -15,6 +15,5 @@ class TestRefactoring(TestCase):
         attributes = {'original_name': 'fn',
                       'new_name'     : 'file_name'}
         obj = Refactoring("Rename Variable", attributes)
-        # value = f"{obj}\n    {attributes}"
         value = str(obj)
         verify(value)
