@@ -20,6 +20,8 @@ function bat_or_cat_stdin {
 }
 
 MODEL="gpt-4-1106-preview"
+MODEL="gpt-4-turbo"
+MODEL="gpt-4o"
 API_URL="https://api.openai.com/v1/chat/completions"
 
 CONTINUE=false
