@@ -11,9 +11,13 @@ class Refactoring:
                 original_name = self.attributes["original_name"]
                 new_name = self.attributes["new_name"]
                 description = f"{name} to {new_name} from {original_name}"
+
             case "Extract Variable" | "Extract Function" | "Extract Method":
-                new_name = self.attributes["new_name"]
+                new_name = self.attributes.get["new_name"]
                 description = f"{name}: {new_name}"
+
             case _ :
-                description = f"{name}"
+                description = (f"{name} - Unknown Refactoring\n"
+                               f"    {self.attributes}\n")
+
         return description

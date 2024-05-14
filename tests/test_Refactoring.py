@@ -33,7 +33,12 @@ class TestRefactoring(TestCase):
         refactoring_list = [
             Refactoring("Extract Variable", {"new_name" : "new_var"}),
             Refactoring("Extract Function", {"new_name": "new_fun"}),
-            Refactoring("Extract Method", {"new_name": "new_meth"})
+            Refactoring("Extract Method", {"new_name": "new_meth"}),
+
+            Refactoring("Extract Variable", {}),
         ]
         value = ''.join(map(lambda obj: str(obj) + '\n', refactoring_list))
         verify(value)
+
+    def test_unknown_refactorings(self):
+        verify(Refactoring("FindAndFixAllBugs", {"cost": 0, "value": 1000}))
