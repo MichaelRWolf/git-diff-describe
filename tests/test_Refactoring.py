@@ -1,9 +1,7 @@
-from shlex import join
 from unittest import TestCase
 
 from approvaltests import verify
 
-from GitDiff import GitDiff
 from Refactoring import Refactoring
 
 
@@ -21,9 +19,8 @@ class TestRefactoring(TestCase):
 
     def test_rename_refactorings(self):
         rename_variable = Refactoring("Rename Variable",
-                                      {"original_name": "maxSpeed",
+                                      {"original_name": "maxSpd",
                                        "new_name": "speedMax"});
-
         rename_method = Refactoring("Rename Method",
                                       {"original_name": "m1",
                                        "new_name": "mach1"});
@@ -31,6 +28,7 @@ class TestRefactoring(TestCase):
                                       {"original_name": "FastCar",
                                        "new_name": "WayOutOfHere"});
 
+        value = ''.join(map(lambda obj: str(obj) + '\n',
+                            [rename_variable, rename_method, rename_class]))
 
-        value = ''.join( [str(rename_variable)+"\n", str(rename_method)+"\n", str(rename_class)+"\n"])
         verify(value)
