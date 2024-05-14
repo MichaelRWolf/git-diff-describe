@@ -1,11 +1,25 @@
-#!/usr/bin/env python3
+# !/usr/bin/env python3
 import os
 import subprocess
 import sys
 
-refactoring_task_description_file_name = 'src/refactoring_task_description.md'
-with open(refactoring_task_description_file_name, 'r') as file:
-    refactoring_task_description = file.read()
+# refactoring_task_description_file_name = '../resources/refactoring_task_description.md'
+# with open(refactoring_task_description_file_name, 'r') as file:
+#     refactoring_task_description = file.read()
+
+def read_task_description():
+    current_dir = os.path.dirname(__file__)
+    task_description_file_path = os.path.join(current_dir,
+                                         '..',
+                                         'resources',
+                                         'refactoring_task_description.md')
+
+    with open(task_description_file_path, 'r') as file:
+        task_description = file.read()
+        return task_description
+
+
+refactoring_task_description = read_task_description()
 
 
 class RefactoringRecognizer:
@@ -52,12 +66,23 @@ class RefactoringRecognizer:
     def chatgpt_prompt_and_return(self):
         prompt = self.assemble_prompt()
 
-        command = ["utils/chatGPT-CLI", prompt]
+        current_dir = os.path.dirname(__file__)
+        chat_command_path = os.path.join(current_dir,
+                                                  '..',
+                                                  'utils',
+                                                  'chatGPT-CLI')
+
+        command = [chat_command_path, prompt]
+        custom_env = self.create_custom_env()
+
+        for key, value in custom_env.items():
+            print(f"{key}: {value}")
+
         self.gpt_result = subprocess.run(command,
                                          stdout=subprocess.PIPE,
                                          stderr=subprocess.PIPE,
                                          text=True,
-                                         env=self.create_custom_env())
+                                         env=custom_env)
         # stdout = result.stdout
         # stderr = result.stderr
         # returncode = result.returncode
@@ -78,10 +103,15 @@ class RefactoringRecognizer:
         return self.__str__()
 
 
-def fetch_openai_api_key():
-    result = os.environ.get('OPENAI_API_KEY')
-    return result.strip()
+# def fetch_openai_api_key():
+#     result = os.environ.get('OPENAI_API_KEY_git_diff_analyzer')
+#     return result.strip()
 
+def fetch_openai_api_key():
+    result = os.environ.get('OPENAI_API_KEY', "")
+    if not result:
+        raise ValueError("Environment variable 'OPENAI_API_KEY' is not set or empty.")
+    return result
 
 #     try:
 #         result = subprocess.run(

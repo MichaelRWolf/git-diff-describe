@@ -13,7 +13,7 @@ class Refactoring:
                 description = f"{name} to {new_name} from {original_name}"
 
             case "Extract Variable" | "Extract Function" | "Extract Method":
-                new_name = self.attributes.get["new_name"]
+                new_name = self.attributes.get("new_name")
                 description = f"{name}: {new_name}"
 
             case _ :

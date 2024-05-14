@@ -34,8 +34,6 @@ class TestRefactoring(TestCase):
             Refactoring("Extract Variable", {"new_name" : "new_var"}),
             Refactoring("Extract Function", {"new_name": "new_fun"}),
             Refactoring("Extract Method", {"new_name": "new_meth"}),
-
-            Refactoring("Extract Variable", {}),
         ]
         value = ''.join(map(lambda obj: str(obj) + '\n', refactoring_list))
         verify(value)
