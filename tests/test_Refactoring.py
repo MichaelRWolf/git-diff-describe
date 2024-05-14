@@ -12,5 +12,8 @@ class TestRefactoring(TestCase):
         assert True
 
     def test_implicit_stringify_displays_name(self):
+        attributes = {'original_name': 'fn',
+                      'new_name'     : 'file_name'}
         obj = Refactoring("Rename Variable")
-        verify(obj)
+        value = f"{obj}\n    {attributes}"
+        verify(value)

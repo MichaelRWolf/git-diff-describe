@@ -1,1 +1,2 @@
 Rename Variable
+    {'original_name': 'fn', 'new_name': 'file_name'}
