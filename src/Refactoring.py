@@ -17,7 +17,7 @@ class Refactoring:
                 description = f"{name}: {new_name}"
 
             case _:
-                description = (f"{name} - Unknown Refactoring\n"
+                description = (f"{name} - Unhandled Refactoring\n"
                                f"    {self.attributes}\n")
 
         return description
