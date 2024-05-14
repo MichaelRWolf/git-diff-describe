@@ -4,10 +4,6 @@ import subprocess
 import sys
 
 
-# refactoring_task_description_file_name = '../resources/refactoring_task_description.md'
-# with open(refactoring_task_description_file_name, 'r') as file:
-#     refactoring_task_description = file.read()
-
 def read_task_description():
     current_dir = os.path.dirname(__file__)
     task_description_file_path = os.path.join(current_dir,
