@@ -76,9 +76,6 @@ class RefactoringRecognizer:
         command = [chat_command_path, prompt]
         custom_env = self.create_custom_env()
 
-        for key, value in custom_env.items():
-            print(f"{key}: {value}")
-
         self.gpt_result = subprocess.run(command,
                                          stdout=subprocess.PIPE,
                                          stderr=subprocess.PIPE,
