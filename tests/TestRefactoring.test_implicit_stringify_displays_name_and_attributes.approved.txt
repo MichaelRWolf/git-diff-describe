@@ -1,1 +1,1 @@
-Rename Variable to file_name from fn
+Rename Variable: file_name (from fname)

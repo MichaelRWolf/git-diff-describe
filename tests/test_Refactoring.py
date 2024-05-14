@@ -7,7 +7,7 @@ from Refactoring import Refactoring
 
 class TestRefactoring(TestCase):
     def test_implicit_stringify_displays_name_and_attributes(self):
-        attributes = {'original_name': 'fn',
+        attributes = {'original_name': 'fname',
                       'new_name': 'file_name'}
         obj = Refactoring("Rename Variable", attributes)
         value = str(obj)
