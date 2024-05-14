@@ -6,10 +6,6 @@ from Refactoring import Refactoring
 
 
 class TestRefactoring(TestCase):
-    def test_harnesses_are_installed(self):
-        obj = Refactoring("xx", attributes)
-        assert True
-
     def test_implicit_stringify_displays_name_and_attributes(self):
         attributes = {'original_name': 'fn',
                       'new_name': 'file_name'}
