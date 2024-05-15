@@ -36,7 +36,7 @@ class RefactoringRecognizer:
 
     def add_diff(self, diff_output):
         if not diff_output:
-            raise ValueError("diff_output string should not be empty")
+            raise ValueError("diff_output is empty")
         self.diff_output = diff_output
 
     def subprocess_info(self):
