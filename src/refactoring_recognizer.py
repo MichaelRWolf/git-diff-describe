@@ -117,10 +117,6 @@ def main():
     print(recognizer.analysis())
 
 
-if __name__ == "__main__":
-    main()
-
-
 def run_recognizer(diff_output):
     recognizer = RefactoringRecognizer()
     # recognizer.add_task(refactoring_task_description)
@@ -140,3 +136,7 @@ def run_recognizer(diff_output):
     output += "# __str__\n"
     output += str(recognizer)
     return output
+
+
+if __name__ == "__main__":
+    main()
