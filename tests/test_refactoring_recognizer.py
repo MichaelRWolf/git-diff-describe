@@ -246,3 +246,86 @@ class TestRefactoringRecognizer(unittest.TestCase):
     """
         output = run_recognizer(diff_output)
         verify_with_scrubber(output)
+
+    def do_not_test_xxx(self):
+        diff_output = """
+        diff --git a/src/refactoring_recognizer.py b/src/refactoring_recognizer.py
+index 908e865..5bdef4f 100755
+--- a/src/refactoring_recognizer.py
++++ b/src/refactoring_recognizer.py
+@@ -119,3 +119,24 @@ def main():
+ 
+ if __name__ == "__main__":
+     main()
++
++
++def run_recognizer(diff_output):
++    recognizer = RefactoringRecognizer()
++    # recognizer.add_task(refactoring_task_description)
++    recognizer.add_diff(diff_output)
++    output = ""
++
++    recognizer.chatgpt_prompt_and_return()
++
++    output += "# subprocess\n"
++    output += recognizer.subprocess_info()
++    output += "\n\n"
++
++    output += "# Result\n"
++    output += str(recognizer.analysis())
++    output += "\n\n"
++
++    output += "# __str__\n"
++    output += str(recognizer)
++    return output
+diff --git a/tests/TestRefactoring.test_unknown_refactorings.approved.txt b/tests/TestRefactoring.test_unknown_refactorings.approved.txt
+index fb85ab5..de8c9b6 100644
+--- a/tests/TestRefactoring.test_unknown_refactorings.approved.txt
++++ b/tests/TestRefactoring.test_unknown_refactorings.approved.txt
+@@ -1,2 +1,2 @@
+-FindAndFixAllBugs - Unknown Refactoring
++FindAndFixAllBugs - Unhandled Refactoring
+     {'cost': 0, 'value': 1000}
+diff --git a/tests/test_refactoring_recognizer.py b/tests/test_refactoring_recognizer.py
+index 9fe6835..2b9f5ab 100644
+--- a/tests/test_refactoring_recognizer.py
++++ b/tests/test_refactoring_recognizer.py
+@@ -5,6 +5,7 @@ import unittest
+ 
+ from approvaltests import verify
+ 
++from refactoring_recognizer import run_recognizer
+ from src.refactoring_recognizer import RefactoringRecognizer
+ 
+ 
+@@ -136,27 +137,6 @@ pattern = r'(?<=\S)([ \t]+)(?=\n)'
+ # refactoring_task_description = re.sub(pattern, '', refactoring_task_description)
+ 
+ 
+-def run_recognizer(diff_output):
+-    recognizer = RefactoringRecognizer()
+-    # recognizer.add_task(refactoring_task_description)
+-    recognizer.add_diff(diff_output)
+-    output = ""
+-
+-    recognizer.chatgpt_prompt_and_return()
+-
+-    output += "# subprocess\n"
+-    output += recognizer.subprocess_info()
+-    output += "\n\n"
+-
+-    output += "# Result\n"
+-    output += str(recognizer.analysis())
+-    output += "\n\n"
+-
+-    output += "# __str__\n"
+-    output += str(recognizer)
+-    return output
+-
+-
+ def return_diff_u_r(filename1, filename2):
+     for filename in [filename1, filename2]:
+         if not os.path.isfile(filename) or not os.access(filename, os.R_OK):
+        """ # noqa: E501, E261
+        output = run_recognizer(diff_output)
+        verify_with_scrubber(output)

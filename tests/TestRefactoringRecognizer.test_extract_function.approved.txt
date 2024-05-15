@@ -16,6 +16,9 @@ returncode
   new_name: fn
 
 
+# Result - Pretty
+[{'refactoring_name': 'Extract Method', 'new_name': 'fn'}]
+
 # __str__
 # Diff output
 --- diffs/lwh_pre_extract_function.py	2024-05-11 18:13:05

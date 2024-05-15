@@ -3,6 +3,8 @@ import os
 import subprocess
 import sys
 
+import yaml
+
 
 def read_task_description():
     current_dir = os.path.dirname(__file__)
@@ -53,10 +55,9 @@ class RefactoringRecognizer:
 
         return info
 
-    @staticmethod
-    def create_custom_env():
+    def create_custom_env(self):
         custom_env = os.environ.copy()
-        secret = fetch_openai_api_key()
+        secret = self.fetch_openai_api_key()
         custom_env['OPENAI_API_KEY'] = secret
         return custom_env
 
@@ -93,15 +94,21 @@ class RefactoringRecognizer:
     def analysis(self):
         return self.gpt_result.stdout
 
+    def analysis_pretty_print(self):
+        yaml_string = self.analysis()
+        # analysis_data = yaml.safe_load(yaml_string)
+        # return str(analysis_data)
+        return yaml_string
+
     def assemble_prompt(self):
         return self.__str__()
 
-
-def fetch_openai_api_key():
-    result = os.environ.get('OPENAI_API_KEY', "")
-    if not result:
-        raise ValueError("Environment variable 'OPENAI_API_KEY' is not set or empty.")
-    return result
+    @staticmethod
+    def fetch_openai_api_key():
+        result = os.environ.get('OPENAI_API_KEY', "")
+        if not result:
+            raise ValueError("Environment variable 'OPENAI_API_KEY' is not set or empty.")
+        return result
 
 
 def main():
@@ -113,7 +120,8 @@ def main():
 
     recognizer.chatgpt_prompt_and_return()
 
-    # print(recognizer.subprocess_info(), file=sys.stdout) 
+    # print(recognizer.subprocess_info(), file=sys.stdout)
+    print(recognizer.analysis_pretty_print())
     print(recognizer.analysis())
 
 
@@ -131,6 +139,10 @@ def run_recognizer(diff_output):
 
     output += "# Result\n"
     output += str(recognizer.analysis())
+    output += "\n\n"
+
+    output += "# Result - Pretty\n"
+    output += str(recognizer.analysis_pretty_print())
     output += "\n\n"
 
     output += "# __str__\n"

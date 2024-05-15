@@ -30,6 +30,9 @@ returncode
   new_name: height
 
 
+# Result - Pretty
+[{'refactoring_name': 'Rename Variable', 'original_name': 'l', 'new_name': 'length'}, {'refactoring_name': 'Rename Variable', 'original_name': 'w', 'new_name': 'width'}, {'refactoring_name': 'Rename Variable', 'original_name': 'h', 'new_name': 'height'}]
+
 # __str__
 # Diff output
 --- diffs/lwh_original.py	2024-05-11 18:13:05
