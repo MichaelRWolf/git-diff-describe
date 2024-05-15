@@ -119,3 +119,24 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
+def run_recognizer(diff_output):
+    recognizer = RefactoringRecognizer()
+    # recognizer.add_task(refactoring_task_description)
+    recognizer.add_diff(diff_output)
+    output = ""
+
+    recognizer.chatgpt_prompt_and_return()
+
+    output += "# subprocess\n"
+    output += recognizer.subprocess_info()
+    output += "\n\n"
+
+    output += "# Result\n"
+    output += str(recognizer.analysis())
+    output += "\n\n"
+
+    output += "# __str__\n"
+    output += str(recognizer)
+    return output
