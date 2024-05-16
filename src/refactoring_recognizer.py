@@ -96,9 +96,17 @@ class RefactoringRecognizer:
 
     def analysis_pretty_print(self):
         yaml_string = self.analysis()
-        # analysis_data = yaml.safe_load(yaml_string)
+        analysis_data = yaml.safe_load(yaml_string)
+        big_stringy = ""
+        for refactoring_attributes in analysis_data:
+            if 'refactoring_name' in refactoring_attributes:
+                stringy = (refactoring_attributes['refactoring_name']) + ":  " + str(refactoring_attributes)
+            else:
+                stringy = "Non-refactoring:  " + str(refactoring_attributes)
+            big_stringy += stringy + "\n"
+
         # return str(analysis_data)
-        return yaml_string
+        return big_stringy
 
     def assemble_prompt(self):
         return self.__str__()

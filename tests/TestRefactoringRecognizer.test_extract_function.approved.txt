@@ -17,7 +17,8 @@ returncode
 
 
 # Result - Pretty
-[{'refactoring_name': 'Extract Method', 'new_name': 'fn'}]
+Extract Method:  {'refactoring_name': 'Extract Method', 'new_name': 'fn'}
+
 
 # __str__
 # Diff output

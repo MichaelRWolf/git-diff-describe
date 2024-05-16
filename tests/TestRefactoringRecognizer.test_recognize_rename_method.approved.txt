@@ -5,7 +5,6 @@ stdout
   new_name: some_renamed_function
 
 
-
 stderr
 
 
@@ -19,9 +18,9 @@ returncode
   new_name: some_renamed_function
 
 
-
 # Result - Pretty
-[{'refactoring_name': 'Rename Function', 'original_name': 'some_function', 'new_name': 'some_renamed_function'}]
+Rename Function:  {'refactoring_name': 'Rename Function', 'original_name': 'some_function', 'new_name': 'some_renamed_function'}
+
 
 # __str__
 # Diff output

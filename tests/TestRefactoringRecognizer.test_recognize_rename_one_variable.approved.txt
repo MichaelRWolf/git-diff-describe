@@ -19,7 +19,8 @@ returncode
 
 
 # Result - Pretty
-[{'refactoring_name': 'Rename Variable', 'original_name': 'vol', 'new_name': 'volume'}]
+Rename Variable:  {'refactoring_name': 'Rename Variable', 'original_name': 'vol', 'new_name': 'volume'}
+
 
 # __str__
 # Diff output

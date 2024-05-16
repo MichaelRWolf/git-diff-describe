@@ -31,7 +31,10 @@ returncode
 
 
 # Result - Pretty
-[{'refactoring_name': 'Rename Variable', 'original_name': 'l', 'new_name': 'length'}, {'refactoring_name': 'Rename Variable', 'original_name': 'w', 'new_name': 'width'}, {'refactoring_name': 'Rename Variable', 'original_name': 'h', 'new_name': 'height'}]
+Rename Variable:  {'refactoring_name': 'Rename Variable', 'original_name': 'l', 'new_name': 'length'}
+Rename Variable:  {'refactoring_name': 'Rename Variable', 'original_name': 'w', 'new_name': 'width'}
+Rename Variable:  {'refactoring_name': 'Rename Variable', 'original_name': 'h', 'new_name': 'height'}
+
 
 # __str__
 # Diff output
