@@ -94,9 +94,15 @@ class RefactoringRecognizer:
     def analysis(self):
         return self.gpt_result.stdout
 
-    def analysis_pretty_print(self):
+    def analysis_pretty_print(self, throw=None):
         yaml_string = self.analysis()
-        analysis_data = yaml.safe_load(yaml_string)
+        analysis_data = []
+
+        try:
+            analysis_data = yaml.safe_load(yaml_string)
+        except yaml.YAMLError as e:
+            raise ValueError(f"Could not parse the following value: {yaml_string}") from e
+
         big_stringy = ""
         for refactoring_attributes in analysis_data:
             if 'refactoring_name' in refactoring_attributes:
