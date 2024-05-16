@@ -94,9 +94,8 @@ class RefactoringRecognizer:
     def analysis(self):
         return self.gpt_result.stdout
 
-    def analysis_pretty_print(self, throw=None):
+    def analysis_pretty_print(self):
         yaml_string = self.analysis()
-        analysis_data = []
 
         try:
             analysis_data = yaml.safe_load(yaml_string)
