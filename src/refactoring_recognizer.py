@@ -108,8 +108,8 @@ class RefactoringRecognizer:
         try:
             analysis_data = yaml.safe_load(cleaned_yaml_string)
         except yaml.YAMLError as e:
-            raise ValueError(f"Could not parse the following value:\n{cleaned_yaml_string}\n"
-                             "Which was cleaned from:\n{yaml_string}\n") from e
+            raise ValueError(f"Could not parse as YAML:\n{cleaned_yaml_string}\n"
+                             f"Which was cleaned from:\n{yaml_string}\n") from e
 
         big_stringy = ""
         for refactoring_attributes in analysis_data:
