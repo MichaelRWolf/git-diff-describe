@@ -108,8 +108,10 @@ class RefactoringRecognizer:
         try:
             analysis_data = yaml.safe_load(cleaned_yaml_string)
         except yaml.YAMLError as e:
-            raise ValueError(f"Could not parse as YAML:\n{cleaned_yaml_string}\n"
-                             f"Which was cleaned from:\n{yaml_string}\n") from e
+            print(f"Could not parse as YAML\n{cleaned_yaml_string}\n", file=sys.stderr)
+            # raise ValueError(f"Could not parse as YAML:\n{cleaned_yaml_string}\n"
+            #                  f"Which was cleaned from:\n{yaml_string}\n") from e
+            return (yaml_string)
 
         big_stringy = ""
         for refactoring_attributes in analysis_data:
@@ -142,9 +144,17 @@ def main():
 
     recognizer.chatgpt_prompt_and_return()
 
-    # print(recognizer.subprocess_info(), file=sys.stdout)
-    print(recognizer.analysis_pretty_print())
-    print(recognizer.analysis())
+    pretty_data_unless_dirty_yaml = recognizer.analysis_pretty_print()
+    yaml_maybe_encrusted = str(recognizer.analysis())
+
+    print("**Pretty Analysis (if clean YAML)L**\n")
+    if pretty_data_unless_dirty_yaml == yaml_maybe_encrusted:
+        print("Dirty YAML -- No Pretty Analysis\n")
+    else:
+        print(pretty_data_unless_dirty_yaml + "\n")
+    print("\n\n")
+    print("**YAML (probably)**\n")
+    print(yaml_maybe_encrusted + "\n")
 
 
 def run_recognizer(diff_output):
