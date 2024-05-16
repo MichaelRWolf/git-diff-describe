@@ -1,5 +1,6 @@
 # !/usr/bin/env python3
 import os
+import re
 import subprocess
 import sys
 
@@ -97,10 +98,18 @@ class RefactoringRecognizer:
     def analysis_pretty_print(self):
         yaml_string = self.analysis()
 
+        pattern = r'^```yaml\s*|```$'
+        # pattern = r'^.*?```yaml\s*|```$'
+
+        cleaned_yaml_string = re.sub(pattern, '', yaml_string, flags=re.MULTILINE)
+        if cleaned_yaml_string != yaml_string:
+            print("Code block indicators were removed from the YAML string.", file=sys.stderr)
+
         try:
-            analysis_data = yaml.safe_load(yaml_string)
+            analysis_data = yaml.safe_load(cleaned_yaml_string)
         except yaml.YAMLError as e:
-            raise ValueError(f"Could not parse the following value: {yaml_string}") from e
+            raise ValueError(f"Could not parse the following value:\n{cleaned_yaml_string}\n"
+                             "Which was cleaned from:\n{yaml_string}\n") from e
 
         big_stringy = ""
         for refactoring_attributes in analysis_data:

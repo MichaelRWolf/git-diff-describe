@@ -87,6 +87,19 @@
 # Also notice that there is not a blank line separating the items with new name: city, state, zip_code.
 # These items are adjacent with no separation.
 # 
+# For each refactoring, output these fields.
+#  - refactoring_name - Use the preferred name, not alternate names
+#  - [attributes] - See below for suggested attributes based on 'refactoring-name'.
+#      Do not output 'attributes' as a collection for attributes.
+#      Simply place the attributes at the same level as 'refactoring_name'.
+#  - [other sttributes] - if you feel that other information would be necessary to categorize the refactoring
+#  
+# If you notice changes that are not refactorings, add thm as list elements with a 'key' of 'change', 
+# and its value being your description.
+# Put double-quotes around each value
+# Assure that values are encoded to prvent YAML parse errors (especially when using punctuation 
+# like `-` `:` `[` and `]` that are special to YAML)
+#
 # Example:
 # - refactoring_name: Rename Variable
 #   original_name: c
@@ -97,15 +110,21 @@
 # - refactoring_name: Rename Variable
 #   original_name: z
 #   new_name: zip_code
-# 
-# 
-# For each refactoring, output these fields.
-#  - refactoring_name - Use the preferred name, not alternate names
-#  - [attributes] - See below for suggested attributes based on 'refactoring-name'.
-#      Do not output 'attributes' as a collection for attributes.
-#      Simply place the attributes at the same level as 'refactoring_name'.
-#  - [other] - if you feel that other information would be necessary to categorize the refactoring
-#  
-# If you notice changes that are not refactorings, describe the changes in the output structure with key 'other changes'.
+# - change: "Add safety precautions to TODO.md file"
+# - change: "reformat file"
+# - change: "remove whitespace"
+# - change: "Assure that 4 - 1 is equal to 3"
+# - change: "too extensive for me to understand"
 # 
 # Do NOT return YAML in a code block.
+# Do NOT put code block indicators around the YAML that is returned
+#
+# Example -- NOT Acceptable
+# ``` yaml
+# - refactoring_name: Extract Method
+#   new_name: express_pizza_delivery
+# ```
+#
+# Example -- MUCH preferred
+# - refactoring_name: Extract Method
+#   new_name: express_pizza_delivery
