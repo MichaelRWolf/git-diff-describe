@@ -1,0 +1,879 @@
+:PROPERTIES:
+:ID:       519AF57F-9710-4B6A-88D9-8BE6AC90A54D
+:header-args: :eval yes
+:END:
+#+title: Mendercon - git-diff-describe demo
+
+# Local Variables:
+# org-confirm-babel-evaluate: nil
+# End:
+
+
+* Demo Data
+
+|------------------------------------------------------------+------------------------------------------|
+| repoUrl                                                    | SHA                                      |
+|------------------------------------------------------------+------------------------------------------|
+| https://github.com/MichaelRWolf/pythonic-sound-off-machine | b17c47c16a05fe34da4bd063fbe1bb14f756175d |
+| https://github.com/MichaelRWolf/pythonic-sound-off-machine | d94869918111fc739eaf23bc2c2cc02dc4041656 |
+|------------------------------------------------------------+------------------------------------------|
+| https://github.com/MichaelRWolf/ApprovalTests.Python       | fb87fa0500e8f2e3262e0be78e495e759ee04e45 |
+|------------------------------------------------------------+------------------------------------------|
+#+NAME: repo-sha-table
+
+
+
+* Why did I do this?
+
+- Marketing
+  Do NOT ask "What do you eat?" at the front door
+  DO go to the back yard and examine trash can
+
+- Pacing of baseball, square dance
+  Action followed by *LOTS* of protocol and waiting  
+
+- Pacing of basketball, soccer, contra dance, rock climbing
+  Flow!!!
+  Adapt
+  Safe
+  
+- Make it easy to do the right thing
+  Fast cycles involve context switch (Codeing, Designing, Debugging, Documenting)
+      ? What should I do?
+      ? Do it!
+      ? What did I do?
+
+- My commit messages were
+  Lies
+  Misrepresentations - I forget all that I did in a cycle
+  Spin
+
+- Babyl Fish needed (Code brain -> English text)
+
+- Play w/ prompts & ChatGPT
+
+- Automate micro-habits
+  Arlo's Commit Notation (v2)
+  Naming as a Process    
+
+
+* Take-Aways
+
+- Testing w/ non-deterministic outputs is
+  - YAML or JSON -> difficult
+  - ChatGPT output -> nearly !$%!!% impossible (given current
+    thinking)
+
+  - ApprovalTest was instrumental to visualize changes (Ref: Emily )
+    
+  - "Other Stuff" >>> refactoring description
+    - What did I forget that I did?
+    - Summary & Abstraction was WAYYYY good.
+    - Perspective on why I did something
+
+  - If _one_ sha is good, sha...sha is better
+    Whole day
+    Section of `main` summarized as `feature branch`
+    Release notes
+    Code archeology
+
+ - Not trustworthy or consistent enough for `git commit -m $(git-diff-describe)`
+    
+
+
+* Basic workflow
+
+1. In IDE -- Edit code / Comple / Test
+
+2. In Shell -- Generate commit message "starter"
+
+ - Now
+    time git diff HEAD~0 | *git-diff-describe* | pbcopy; pbpaste; say "commit it"";  date;  ## doit
+
+ - Goal
+   git add --all  &&  git commit -m "$(git diff HEAD~0 | **git-diff-describer**)"  &&  git log
+
+3. In IDE -- Edit commit-message / commit / celebrate
+    Ctl-V into commit message window
+    No speed bumps.
+    No writer's block.
+    No memory lapse.
+
+4. Still in IDE -- Keep rolling.
+
+```
+
+
+* Rapid-commit work flow
+
+** git-log
+#+name: git-log
+#+begin_src bash :results output file :file output/parrot_log.txt
+  cd ~/repos/Parrot-Refactoring-Kata || exit 2
+  git log --pretty="format:# sha=%H;  commit_message=\"%s\""
+#+end_src
+
+#+RESULTS: git-log
+[[file:output/parrot_log.txt]]
+
+
+
+** edit / test / C-o-m-p-o-s-e C-o-m-m-i-t  M-e-s-s-a-g-e
+#+name: edit-test-compose
+
+
+#+begin_src bash :results output verbatim
+  #-- sha=f922f450c70fe1d731ab5db34b4fc4719d057fe9;  commit_message="r Extract methods: createEuropeanParrot(), createAfricanParrot(), createNorwegianBlueParrot()"
+  # sha=57840d363362a471b1d3f82c7a2ec805d88f8f6d;  commit_message="r Replace lambda statement with lambda expression"
+  # -- sha=f0f9498026f7b6d5df93b9f221b1184649dedf61;  commit_message="r Replace lambda statement with lambda expression"
+  # -- sha=b2b262145820d836a37974675fdd13c0026b67d3;  commit_message="t New test: getEuropeanParrotWithCoconuts"
+  # -- sha=126cf4f3a14a2062d92e12e0940175dbff9fd549;  commit_message="  Commentary on why NorwegianBlue's base speed is voltage-dependant"
+  # -- sha=704037ada806dfaa45380bdb55e1e6e68af31c8b;  commit_message="R Remove member from AfricanParrot: voltage"
+  # sha=f21b9c2876aff6f677d345d23864424feb066384;  commit_message="r Remove unused member from EuropeanParrot: voltage"
+  # sha=9946edab6a98e3cf4d824c5804a97eced9883d34;  commit_message="r Rearrange order of definition"
+  # sha=4423bde092d9aba1d289ba5a1982ec15239d7992;  commit_message="R Remove unused 'isNailed' from sub-classes"
+  # ++ sha=592658b9d8ec0a20fb0ebb2f86ef58132220d814;  commit_message="Push down member: voltage"
+
+  # Extract Class (x3) + 'Ensure count..
+  # ++ 
+sha=c53a6edd034b48a4f639089a18805c1c65d675cb;  commit_message="R Push down member: NumberOfCoconuts"
+
+  # sha=52916495446ad23dc30c0693a33dd944cf62bb97;  commit_message="R Delete field: type"
+  # sha=e613056a9516c83be66e6cf1cb128220e8381652;  commit_message="R Remove 'type' parameter to sub-class constructors"
+  # sha=03d9c992224ced07a0b50bb9cc7fcfe80b1343bb;  commit_message="r Push down member: getCry()"
+  # sha=7eee9cecfe5ce6c6bd3daefc7b49e8f2c7f04748;  commit_message="R Push down member: getLoadFactor()"
+  # sha=d203035c20a0dc3d3ff63ddd19ad64fd41bd3645;  commit_message="r Push down member: getBaseSpeed()"
+  # sha=e381b57bd2253e69baa62fae2c8b4f0d395e7060;  commit_message="r Removed unused code in Parrot sub-classes: getSpeed()"
+  # sha=715b67aceeafc9d541b1d1ce4932116a0934e1cb;  commit_message="r Push-down member: getSpeed() R Expand member scope from private to protected"
+  # sha=0b38600da173b762ca8bcf8500a4c7e483100284;  commit_message="r Create sub-clases EuropeanParrot, AfricanParrot, NorwegianBlueParrot"
+  # sha=c9610504228ce3b3fa553711cef912354afb2fa3;  commit_message="r Inline variable 'parrot'"
+  # sha=bc57bde84ee7b81d2fa5c177c9880138a489efa8;  commit_message="r Replace if/else with switch(type)"
+  # -- sha=da4ade8d5cd1de7c475834abc836e307d9d1b95c;  commit_message="R Added if/else 'type' logic to createParrot()"
+  # sha=8de770d716df19ff3efa1451777005bdbe58411a;  commit_message="r Extract variable: Parrot"
+  # sha=8ffe1f909f53ecf5096315ff6e4755a5771eeb90;  commit_message="r Reformat"
+  # -- sha=34ba54986ef41d36eeb289f3968ec1c01d19a28e;  commit_message="r Replace constructor w/ Factory Method"
+
+  
+  # Span that covers crux move of move method down
+  # ++++ 
+sha=57840d363362a471b1d3f82c7a2ec805d88f8f6d; earlier_sha=8d674eb57cbd481345670800a2c5f0baa29c909e;
+
+      cd ~/repos/Parrot-Refactoring-Kata || exit 2
+
+      echo "$commit_message\n\n"
+      echo "================================================================"
+
+      if [[ -z "${sha}" ]]; then echo "Need a SHA"; exit 3; fi
+      if [[ -z "${earlier_sha}" ]]; then earlier_sha="${sha}^"; fi
+
+      git diff ${earlier_sha}...${sha} | git-diff-describe
+#+end_src
+
+#+RESULTS:
+#+begin_example
+R Push down member: NumberOfCoconuts\n\n
+================================================================
+Replace Conditional with Polymorphism - Unhandled Refactoring
+    {'refactoring_name': 'Replace Conditional with Polymorphism', 'original_class': 'Parrot', 'new_classes': ['EuropeanParrot', 'AfricanParrot', 'NorwegianBlueParrot'], 'original_filename': 'Java/src/main/java/parrot/Parrot.java', 'new_filenames': ['Java/src/main/java/parrot/EuropeanParrot.java', 'Java/src/main/java/parrot/AfricanParrot.java', 'Java/src/main/java/parrot/NorwegianBlueParrot.java']}
+
+Replace Conditional with Polymorphism - Unhandled Refactoring
+    {'refactoring_name': 'Replace Conditional with Polymorphism', 'original_class': 'Parrot', 'new_classes': ['EuropeanParrot', 'AfricanParrot', 'NorwegianBlueParrot'], 'original_filename': 'Python/Parrot-Refactoring-Kata/src/parrot.py', 'new_filenames': ['Python/Parrot-Refactoring-Kata/src/parrot.py']}
+
+Non-refactoring:  {'change': 'Add unit tests for invalid EuropeanParrot configurations in Java/ParrotTest.java'}
+Non-refactoring:  {'change': 'Update Python references to use factory method in Python/tests/test_parrot.py'}
+Non-refactoring:  {'change': 'Add documentation to Python/Notes.md on refactoring steps and reasoning'}
+
+
+
+
+
+,**YAML (probably)**
+
+- refactoring_name: Replace Conditional with Polymorphism
+  original_class: Parrot
+  new_classes: [EuropeanParrot, AfricanParrot, NorwegianBlueParrot]
+  original_filename: Java/src/main/java/parrot/Parrot.java
+  new_filenames: [Java/src/main/java/parrot/EuropeanParrot.java, Java/src/main/java/parrot/AfricanParrot.java, Java/src/main/java/parrot/NorwegianBlueParrot.java]
+- refactoring_name: Replace Conditional with Polymorphism
+  original_class: Parrot
+  new_classes: [EuropeanParrot, AfricanParrot, NorwegianBlueParrot]
+  original_filename: Python/Parrot-Refactoring-Kata/src/parrot.py
+  new_filenames: [Python/Parrot-Refactoring-Kata/src/parrot.py]
+- change: "Add unit tests for invalid EuropeanParrot configurations in Java/ParrotTest.java"
+- change: "Update Python references to use factory method in Python/tests/test_parrot.py"
+- change: "Add documentation to Python/Notes.md on refactoring steps and reasoning"
+
+
+
+#+end_example
+
+
+  # cd $repoUrl && git diff ${sha}^...${sha} | git-diff-describe
+
+
+
+* One day's work on project - git-diff-describe
+
+** git-diff
+
+#+name: one-day-diff
+#+begin_src bash :results output file :file output/one-day.diff
+
+  cd /Users/michael/repos/git-diff-describe;
+	  early_date_time="2024-05-10 08:00";
+	  later_date_time="2024-05-10 23:59";
+
+	  sha_list=$(git log 			\
+		  --since="${early_date_time}" 	\
+		  --until="${later_date_time}" 	\
+		  --pretty=format:"%H" )
+
+
+	  early_sha=$(echo "$sha_list" | tail -n1);
+	  later_sha=$(echo "$sha_list" | head -n1);
+
+	  git diff ${early_sha}...${later_sha}
+#+end_src
+
+** git-diff-describe
+
+#+RESULTS: one-day-diff
+[[file:output/one-day.diff]]
+
+
+#+begin_src bash :var unified_diff=one-day-diff :results output file :file output/one-day.txt
+  cat $unified_diff | git-diff-describe
+#+end_src
+
+#+RESULTS:
+[[file:output/one-day.txt]]
+
+
+* Few day's work on kata - 
+
+** diff
+
+#+name: many-day-diff
+#+begin_src bash :results output file :file output/many-day.diff
+  cd /Users/michael/repos/VerseLearner2013 || exit 2
+  git diff ea86..HEAD
+#+end_src
+
+#+RESULTS: many-day-diff
+[[file:output/many-day.diff]]
+
+** describe
+
+#+begin_src bash :var unified_diff=many-day-diff :results output file :file output/many-day.txt
+  cat $unified_diff | git-diff-describe
+#+end_src
+
+#+RESULTS:
+[[file:output/many-day.txt]]
+
+
+
+* Multi-day Parrot Refactoring
+
+#+name: many-step-kata
+#+begin_src bash :results output file :file output/poly-more-fit-parrot.diff
+  repoUrl="https://github.com/MichaelRWolf/Parrot-Refactoring-Kata/"
+  cd ~/repos/Parrot-Refactoring-Kata || exit 2
+  git diff bea62b82a409f927069129d4cb208e14d5d62f6d...f922f450c70fe1d731ab5db34b4fc4719d057fe9
+#+end_src
+
+#+RESULTS: many-step-kata
+[[file:output/poly-more-fit-parrot.diff]]
+
+#+begin_src bash :var unified_diff=many-step-kata :results output file :file output/poly-more-fit-parrot.txt
+  cat $unified_diff | ~/bin/git-diff-describe
+#+end_src
+
+#+RESULTS:
+[[
+file:output/poly-more-fit-parrot.txt]]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+* Scratch Pad Below Here
+
+
+#+NAME: git-diff-for-sha
+#+HEADER: :var repo_url="https://github.com/MichaelRWolf/pythonic-sound-off-machine"  
+#+HEADER: :var sha="yyy"
+#+HEADER: :var xxx="hello"
+#+BEGIN_SRC bash :results output
+  # Extract repository name from URL
+  repo_name=$(echo $repo_url | sed 's|.*/||')
+  repo_directory="$HOME/repos/$repo_name"
+
+  # Ensure the repository is cloned and up to date
+  if [ ! -d "$repo_directory" ]; then
+    git clone $repo_url $repo_directory
+  else
+    cd $repo_directory
+    git pull
+  fi
+
+  # Change to the repository directory and perform git diff
+  echo cd $repo_directory
+  echo git diff $sha
+  echo xxx $xxx
+#+END_SRC
+
+#+RESULTS: git-diff-for-sha
+: Already up to date.
+: cd /Users/michael/repos/pythonic-sound-off-machine
+: git diff yyy
+: xxx hello
+
+
+  
+#+end_src
+
+
+
+* Stuff
+
+#+PROPERTY: header-args :dir /Users/michael/Mendercon-2024
+#+PROPERTY: header-args :eval yes
+
+* Working directory
+
+#+name: wd
+#+begin_src bash :results silent :dir /usr/local/bin
+pwd
+#+end_src
+
+* Connecting code blocks
+
+Use most recent execution of `wd` code block
+
+
+#+begin_src bash :var xxx=wd :results output verbatim
+echo "   $xxx was most recent value"
+#+end_src
+
+#+RESULTS:
+:    /usr/local/bin was most recent value
+
+
+
+* git-diff
+
+** 
+
+** describe X 3
+
+#+name: describe
+#+begin_src bash  :var diff=generateGitDiff  :results output verbatim
+  for iteration in 1 2 3; do
+    echo "Iteration ${iteration} ================================================================"
+    echo "$diff" | git-diff-describe
+  done
+
+      #echo "$diff" | (echo "Iteration #$git-diff-describe
+#+end_src
+
+#+RESULTS: describe
+#+begin_example
+Iteration 1 ================================================================
+sha256:dcba07c58a81663d6895354695d52461e2a7d4817c33c77e15aab0cd746bb8fc
+- refactoring_name: Rename Variable
+  original_name: __pycache__
+  new_name: IDE Files
+- refactoring_name: Rename Variable
+  original_name: *.received.*  
+  new_name: node_modules
+- refactoring_name: Rename Variable
+  original_name: .idea/**
+  new_name: .env   
+- refactoring_name: Move Method
+  original_filename: .gitignore
+  new_filename: TODO.md
+- refactoring_name: Extract Method
+  new_name: equalEnoughForApprovalTest  
+other changes:
+  - Updated misc.xml to include languageLevel "JDK_21"
+  - Removed trailing whitespace in Dockerfile
+  - Added TODO.md with several tasks related to Dockerfile, README, LICENSE, secrets management, class functionalities and recommendations.
+  - Created secrets.md to provide guidelines on managing secrets in Google Scripts environment.
+
+Iteration 2 ================================================================
+sha256:dcba07c58a81663d6895354695d52461e2a7d4817c33c77e15aab0cd746bb8fc
+- refactoring_name: Rename Directory
+  original_name: .idea/**
+  new_name: .idea/
+
+- refactoring_name: Rename Directory
+  original_name: google_apps_script/node_modules/**
+  new_name: google_apps_script/node_modules/
+
+- refactoring_name: Remove File Extension
+  original_name: *.received.*
+  new_name: '*.received'
+
+- refactoring_name: Replace File
+  original_name: Dockerfile
+  new_name: Dockerfile
+  other_changes:
+    - "Whitespace adjustment in a RUN command."
+
+- refactoring_name: Create File
+  new_name: TODO.md
+
+- refactoring_name: Create File
+  new_name: docs/secrets.md
+
+other_changes:
+  - "Addition of several ignore rules to .gitignore."
+  - "Change in .idea/misc.xml to include the languageLevel attribute."
+  - "Addition of comments and section headers in .gitignore."
+  - "Introduction of new Markdown files TODO.md and secrets.md with content."
+
+Iteration 3 ================================================================
+sha256:dcba07c58a81663d6895354695d52461e2a7d4817c33c77e15aab0cd746bb8fc
+- refactoring_name: Extract Variable
+  original_name: __pycache__
+  new_name: venv
+- refactoring_name: Extract Variable
+  original_name: *.received.*
+  new_name: *.pyc
+- refactoring_name: Rename Directory
+  original_filename: .idea/**
+  new_filename: .idea/
+- refactoring_name: Rename Variable
+  original_name: google_apps_script/node_modules/**
+  new_name: google_apps_script/node_modules/
+- refactoring_name: Delete Variable
+  original_name: package-lock.json
+- refactoring_name: Delete Variable
+  original_name: build/**
+- refactoring_name: Extract Variable
+  original_name: diff_generation_files/
+  new_name: diff_generation_files/
+- refactoring_name: Extract Variable
+  original_name: sandbox/
+  new_name: sandbox/
+- refactoring_name: Delete Variable
+  original_name: project-jdk-name
+- refactoring_name: Create Variable
+  new_name: languageLevel
+- refactoring_name: Delete File
+  original_filename: Dockerfile
+- refactoring_name: Create File
+  new_filename: TODO.md
+- refactoring_name: Create File
+  new_filename: docs/secrets.md
+other changes:
+  - Modified line-endings or whitespace (e.g., removed trailing spaces, added newline at end of file)
+  - Changed project JDK configuration (e.g., update of IDE settings)
+  - Cleanup Dockerfile (e.g., consistent use of apt-get install flag)
+  - Creation of documentation and task outline files (e.g., TODO.md, secrets.md)
+
+#+end_example
+
+
+
+#+begin_example
+diff --git a/.gitignore b/.gitignore
+index dcc0350..576a209 100644
+--- a/.gitignore
++++ b/.gitignore
+@@ -1,10 +1,27 @@
+-__pycache__/
+-*.received.*
+-.idea/**
+-diff_generation_files/
+-sandbox/
+-google_apps_script/node_modules/**
++# IDE Files
++.idea/
++
++# Node.js dependencies
++node_modules/
++google_apps_script/node_modules/
+ package-lock.json
+-build/**
+ 
++# Approval test files
++*.received.*
++
++# Python build files
++*.egg-info/
++*.pyc
++__pycache__/
++
++# Virtual environment directories
++venv/
++.env/
+ 
++# Distribution build directories
++build/
++dist/
++
++# Project-specific files
++diff_generation_files/
++sandbox/
+\ No newline at end of file
+diff --git a/.idea/misc.xml b/.idea/misc.xml
+index 50aefaf..1b30eab 100644
+--- a/.idea/misc.xml
++++ b/.idea/misc.xml
+@@ -3,5 +3,5 @@
+   <component name="Black">
+     <option name="sdkName" value="Python 3.10 (commit-message-generator)" />
+   </component>
+-  <component name="ProjectRootManager" version="2" project-jdk-name="Python 3.10 (commit-message-generator)" project-jdk-type="Python SDK" />
++  <component name="ProjectRootManager" version="2" languageLevel="JDK_21" default="true" project-jdk-name="Python 3.10 (commit-message-generator)" project-jdk-type="Python SDK" />
+ </project>
+\ No newline at end of file
+diff --git a/Dockerfile b/Dockerfile
+index 6426859..f32c97a 100644
+--- a/Dockerfile
++++ b/Dockerfile
+@@ -20,7 +20,7 @@ CMD [ "python", "src/refactoring_recognizer.py" ]
+ # I am coming in as src/.., but there is no src/../..
+ 
+ 
+-RUN apt-get update && apt-get install -y jq 
++RUN apt-get update && apt-get install -y jq
+ # RUN apt-get update && apt-get install -y bat
+ 
+ 
+diff --git a/TODO.md b/TODO.md
+new file mode 100644
+index 0000000..026263c
+--- /dev/null
++++ b/TODO.md
+@@ -0,0 +1,58 @@
++
++# Dockerfile
++
++Q - Why does removing this line still build the script and let it run,
++but have it produce no output?
++> `RUN apt-get update && apt-get install -y jq`
++
++# README.md
++
++- Create it
++
++
++# LICENSE.txt
++
++- Create it
++
++
++# OPENAI_API_KEY
++- Describe in `README.md`
++
++
++# GitHub PAT (Personal Access Token)
++- Describe in `README.md`
++- Allow users to provide their own GitHub token
++- Later - Allow users to authorize via OAuth.
++
++
++# Class GitDiffAnalyzer
++- Q? - Why does 'rewrite expression' get interpreted as 'rename variable'
++
++
++# Class GitDiffDescription
++- Add member `RecommendationsToImproveGitDiffAnalyzer`
++  - More `diff` context?
++  - Supply complete file?
++
++
++# Class GitDiffDescriptionFormatter
++- `formatAsPlainText()`
++  - Use `case` statement for each kind in GAS spreadsheet
++  - Do not (yet) subclass anything
++- NOT YET
++  - `formatAsCommitMessage()`
++  - `_commitMessageHeader()`
++  - `_commitMessageBody()`
++
++
++# Class ApprovalTestComparer
++- Add  method`function equalEnoughForApprovalTest() : Boolean`
++
++
++
++
++
++
++
++
++
+diff --git a/docs/secrets.md b/docs/secrets.md
+new file mode 100644
+index 0000000..9117589
+--- /dev/null
++++ b/docs/secrets.md
+@@ -0,0 +1,35 @@
++* Secrets
++  Q - How does Google Scripts environment have access to environment variables?  
++  A - Google Scripts environment has access to environment variables through the PropertiesService.getScriptProperties()
++  method.
++
++Q - How to store secrets in Google Scripts?
++A - Use the PropertiesService.getUserProperties() method to store secrets. This method stores secrets in the user's
++Google account. The user can access the secrets by going to File -> Project Properties -> User Properties.
++
++Q - How to store secrets in Google Apps Script?
++A - Use the PropertiesService.getScriptProperties() method to store secrets. This method stores secrets in the script
++project. The secrets are not accessible to the user.
++
++Q - What is the difference between the two methods?
++
++Q - What is a good way for other users to provide OPENAI_API_KEY, GITHUB_TOKEN if I were to distribute this script as a
++Docker image?
++A - Use the PropertiesService.getUserProperties() method to store secrets. This method stores secrets in the user's
++Google account. The user can access the secrets by going to File -> Project Properties -> User Properties.
++
++Q - How will users store OPENAI_API_KEY, GITHUB_TOKEN, and make them available as environment variables, thus making
++them available to the Google Apps Script?
++A - Use the PropertiesService.getUserProperties() method to store secrets.
++
++Q - How do users run PropertyService.getUserProperties() method?
++A - Users can run the PropertyService.getUserProperties() method by going to File -> Project Properties -> User
++Properties.
++
++Q - Do these get backed up to the user's Google Drive?
++A - No. The user's Google Drive does not back up the user properties.
++
++Q - Where are User Properties located in IntelliJ on macOS, since they are NOT in File -> Project Properties -> User
++Properties?
++A - User Properties are located in the IntelliJ Preferences -> Languages & Frameworks -> Google Apps Script -> User
++Properties.
+
+#+end_example
+
+
+
+#+begin_example
+
+
+diff --git a/.gitignore b/.gitignore
+index dcc0350..576a209 100644
+--- a/.gitignore
++++ b/.gitignore
+@@ -1,10 +1,27 @@
+-__pycache__/
+-*.received.*
+-.idea/**
+-diff_generation_files/
+-sandbox/
+-google_apps_script/node_modules/**
++# IDE Files
++.idea/
++
++# Node.js dependencies
++node_modules/
++google_apps_script/node_modules/
+ package-lock.json
+-build/**
+ 
++# Approval test files
++*.received.*
++
++# Python build files
++*.egg-info/
++*.pyc
++__pycache__/
++
++# Virtual environment directories
++venv/
++.env/
+ 
++# Distribution build directories
++build/
++dist/
++
++# Project-specific files
++diff_generation_files/
++sandbox/
+\ No newline at end of file
+diff --git a/.idea/misc.xml b/.idea/misc.xml
+index 50aefaf..1b30eab 100644
+--- a/.idea/misc.xml
++++ b/.idea/misc.xml
+@@ -3,5 +3,5 @@
+   <component name="Black">
+     <option name="sdkName" value="Python 3.10 (commit-message-generator)" />
+   </component>
+-  <component name="ProjectRootManager" version="2" project-jdk-name="Python 3.10 (commit-message-generator)" project-jdk-type="Python SDK" />
++  <component name="ProjectRootManager" version="2" languageLevel="JDK_21" default="true" project-jdk-name="Python 3.10 (commit-message-generator)" project-jdk-type="Python SDK" />
+ </project>
+\ No newline at end of file
+diff --git a/Dockerfile b/Dockerfile
+index 6426859..f32c97a 100644
+--- a/Dockerfile
++++ b/Dockerfile
+@@ -20,7 +20,7 @@ CMD [ "python", "src/refactoring_recognizer.py" ]
+ # I am coming in as src/.., but there is no src/../..
+ 
+ 
+-RUN apt-get update && apt-get install -y jq 
++RUN apt-get update && apt-get install -y jq
+ # RUN apt-get update && apt-get install -y bat
+ 
+ 
+diff --git a/TODO.md b/TODO.md
+new file mode 100644
+index 0000000..026263c
+--- /dev/null
++++ b/TODO.md
+@@ -0,0 +1,58 @@
++
++# Dockerfile
++
++Q - Why does removing this line still build the script and let it run,
++but have it produce no output?
++> `RUN apt-get update && apt-get install -y jq`
++
++# README.md
++
++- Create it
++
++
++# LICENSE.txt
++
++- Create it
++
++
++# OPENAI_API_KEY
++- Describe in `README.md`
++
++
++# GitHub PAT (Personal Access Token)
++- Describe in `README.md`
++- Allow users to provide their own GitHub token
++- Later - Allow users to authorize via OAuth.
++
++
++# Class GitDiffAnalyzer
++- Q? - Why does 'rewrite expression' get interpreted as 'rename variable'
++
++
++# Class GitDiffDescription
++- Add member `RecommendationsToImproveGitDiffAnalyzer`
++  - More `diff` context?
++  - Supply complete file?
++
++
++# Class GitDiffDescriptionFormatter
++- `formatAsPlainText()`
++  - Use `case` statement for each kind in GAS spreadsheet
++  - Do not (yet) subclass anything
++- NOT YET
++  - `formatAsCommitMessage()`
++  - `_commitMessageHeader()`
++  - `_commitMessageBody()`
++
++
++# Class ApprovalTestComparer
++- Add  method`function equalEnoughForApprovalTest() : Boolean`
++
++
++
++
++
++
++
++
++
+diff --git a/docs/secrets.md b/docs/secrets.md
+new file mode 100644
+index 0000000..9117589
+--- /dev/null
++++ b/docs/secrets.md
+@@ -0,0 +1,35 @@
++* Secrets
++  Q - How does Google Scripts environment have access to environment variables?  
++  A - Google Scripts environment has access to environment variables through the PropertiesService.getScriptProperties()
++  method.
++
++Q - How to store secrets in Google Scripts?
++A - Use the PropertiesService.getUserProperties() method to store secrets. This method stores secrets in the user's
++Google account. The user can access the secrets by going to File -> Project Properties -> User Properties.
++
++Q - How to store secrets in Google Apps Script?
++A - Use the PropertiesService.getScriptProperties() method to store secrets. This method stores secrets in the script
++project. The secrets are not accessible to the user.
++
++Q - What is the difference between the two methods?
++
++Q - What is a good way for other users to provide OPENAI_API_KEY, GITHUB_TOKEN if I were to distribute this script as a
++Docker image?
++A - Use the PropertiesService.getUserProperties() method to store secrets. This method stores secrets in the user's
++Google account. The user can access the secrets by going to File -> Project Properties -> User Properties.
++
++Q - How will users store OPENAI_API_KEY, GITHUB_TOKEN, and make them available as environment variables, thus making
++them available to the Google Apps Script?
++A - Use the PropertiesService.getUserProperties() method to store secrets.
++
++Q - How do users run PropertyService.getUserProperties() method?
++A - Users can run the PropertyService.getUserProperties() method by going to File -> Project Properties -> User
++Properties.
++
++Q - Do these get backed up to the user's Google Drive?
++A - No. The user's Google Drive does not back up the user properties.
++
++Q - Where are User Properties located in IntelliJ on macOS, since they are NOT in File -> Project Properties -> User
++Properties?
++A - User Properties are located in the IntelliJ Preferences -> Languages & Frameworks -> Google Apps Script -> User
++Properties.
+
+#+end_example
+
+
+
+** generateGitDiff
+#+name: generateGitDiff
+#+begin_src bash :results output silent
+
+  cd /Users/michael/repos/git-diff-describe;
+  early_date_time="2024-05-10 08:00";
+  later_date_time="2024-05-10 23:59";
+
+  sha_list=$(git log 			\
+		 --since="${early_date_time}" 	\
+		 --until="${later_date_time}" 	\
+		 --pretty=format:"%H" )
+
+
+  early_sha=$(echo "$sha_list" | tail -n1);
+  later_sha=$(echo "$sha_list" | head -n1);
+
+  git diff ${early_sha}...${later_sha}
+#+end_src
+
+
+
