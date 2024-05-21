@@ -174,14 +174,20 @@ sha=57840d363362a471b1d3f82c7a2ec805d88f8f6d; earlier_sha=8d674eb57cbd4813456708
 R Push down member: NumberOfCoconuts\n\n
 ================================================================
 Replace Conditional with Polymorphism - Unhandled Refactoring
-    {'refactoring_name': 'Replace Conditional with Polymorphism', 'original_class': 'Parrot', 'new_classes': ['EuropeanParrot', 'AfricanParrot', 'NorwegianBlueParrot'], 'original_filename': 'Java/src/main/java/parrot/Parrot.java', 'new_filenames': ['Java/src/main/java/parrot/EuropeanParrot.java', 'Java/src/main/java/parrot/AfricanParrot.java', 'Java/src/main/java/parrot/NorwegianBlueParrot.java']}
+    {'refactoring_name': 'Replace Conditional with Polymorphism', 'original_class': 'Parrot', 'new_class': 'EuropeanParrot', 'original_filename': 'Parrot.java', 'new_filename': 'EuropeanParrot.java'}
 
 Replace Conditional with Polymorphism - Unhandled Refactoring
-    {'refactoring_name': 'Replace Conditional with Polymorphism', 'original_class': 'Parrot', 'new_classes': ['EuropeanParrot', 'AfricanParrot', 'NorwegianBlueParrot'], 'original_filename': 'Python/Parrot-Refactoring-Kata/src/parrot.py', 'new_filenames': ['Python/Parrot-Refactoring-Kata/src/parrot.py']}
+    {'refactoring_name': 'Replace Conditional with Polymorphism', 'original_class': 'Parrot', 'new_class': 'AfricanParrot', 'original_filename': 'Parrot.java', 'new_filename': 'AfricanParrot.java'}
 
-Non-refactoring:  {'change': 'Add unit tests for invalid EuropeanParrot configurations in Java/ParrotTest.java'}
-Non-refactoring:  {'change': 'Update Python references to use factory method in Python/tests/test_parrot.py'}
-Non-refactoring:  {'change': 'Add documentation to Python/Notes.md on refactoring steps and reasoning'}
+Replace Conditional with Polymorphism - Unhandled Refactoring
+    {'refactoring_name': 'Replace Conditional with Polymorphism', 'original_class': 'Parrot', 'new_class': 'NorwegianBlueParrot', 'original_filename': 'Parrot.java', 'new_filename': 'NorwegianBlueParrot.java'}
+
+Extract Method: createParrot
+Non-refactoring:  {'change': 'Add assertions to enforce the correct usage of ParrotTypeEnum for type-specific parameters'}
+Non-refactoring:  {'change': 'Add test cases to check for invalid parameters and raised exceptions'}
+Non-refactoring:  {'change': 'Update import statements and references in tests to reflect new classes'}
+Non-refactoring:  {'change': 'Extract base methods like getBaseSpeed and getLoadFactor to abstract class Parrot'}
+Non-refactoring:  {'change': "Switch to using the 'match' statement for concise conditional handling in Python"}
 
 
 
@@ -191,18 +197,27 @@ Non-refactoring:  {'change': 'Add documentation to Python/Notes.md on refactorin
 
 - refactoring_name: Replace Conditional with Polymorphism
   original_class: Parrot
-  new_classes: [EuropeanParrot, AfricanParrot, NorwegianBlueParrot]
-  original_filename: Java/src/main/java/parrot/Parrot.java
-  new_filenames: [Java/src/main/java/parrot/EuropeanParrot.java, Java/src/main/java/parrot/AfricanParrot.java, Java/src/main/java/parrot/NorwegianBlueParrot.java]
+  new_class: EuropeanParrot
+  original_filename: Parrot.java
+  new_filename: EuropeanParrot.java
 - refactoring_name: Replace Conditional with Polymorphism
   original_class: Parrot
-  new_classes: [EuropeanParrot, AfricanParrot, NorwegianBlueParrot]
-  original_filename: Python/Parrot-Refactoring-Kata/src/parrot.py
-  new_filenames: [Python/Parrot-Refactoring-Kata/src/parrot.py]
-- change: "Add unit tests for invalid EuropeanParrot configurations in Java/ParrotTest.java"
-- change: "Update Python references to use factory method in Python/tests/test_parrot.py"
-- change: "Add documentation to Python/Notes.md on refactoring steps and reasoning"
-
+  new_class: AfricanParrot
+  original_filename: Parrot.java
+  new_filename: AfricanParrot.java
+- refactoring_name: Replace Conditional with Polymorphism
+  original_class: Parrot
+  new_class: NorwegianBlueParrot
+  original_filename: Parrot.java
+  new_filename: NorwegianBlueParrot.java
+- refactoring_name: Extract Method
+  original_class: Parrot
+  new_name: createParrot
+- change: "Add assertions to enforce the correct usage of ParrotTypeEnum for type-specific parameters"
+- change: "Add test cases to check for invalid parameters and raised exceptions"
+- change: "Update import statements and references in tests to reflect new classes"
+- change: "Extract base methods like getBaseSpeed and getLoadFactor to abstract class Parrot"
+- change: "Switch to using the 'match' statement for concise conditional handling in Python"
 
 
 #+end_example
@@ -276,7 +291,7 @@ Non-refactoring:  {'change': 'Add documentation to Python/Notes.md on refactorin
 * Multi-day Parrot Refactoring
 
 #+name: many-step-kata
-#+begin_src bash :results output file :file output/poly-more-fit-parrot.diff
+#+begin_src shell :results output file :file output/poly-more-fit-parrot.diff
   repoUrl="https://github.com/MichaelRWolf/Parrot-Refactoring-Kata/"
   cd ~/repos/Parrot-Refactoring-Kata || exit 2
   git diff bea62b82a409f927069129d4cb208e14d5d62f6d...f922f450c70fe1d731ab5db34b4fc4719d057fe9
@@ -290,9 +305,7 @@ Non-refactoring:  {'change': 'Add documentation to Python/Notes.md on refactorin
 #+end_src
 
 #+RESULTS:
-[[
-file:output/poly-more-fit-parrot.txt]]
-
+[[file:output/poly-more-fit-parrot.txt]]
 
 
 
