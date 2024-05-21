@@ -6,6 +6,8 @@ import sys
 
 import yaml
 
+from Refactoring import Refactoring
+
 
 def read_task_description():
     current_dir = os.path.dirname(__file__)
@@ -117,6 +119,8 @@ class RefactoringRecognizer:
         for refactoring_attributes in analysis_data:
             if 'refactoring_name' in refactoring_attributes:
                 stringy = (refactoring_attributes['refactoring_name']) + ":  " + str(refactoring_attributes)
+                r = Refactoring(refactoring_attributes['refactoring_name'], refactoring_attributes)
+                stringy = str(r)
             else:
                 stringy = "Non-refactoring:  " + str(refactoring_attributes)
             big_stringy += stringy + "\n"
@@ -147,7 +151,6 @@ def main():
     pretty_data_unless_dirty_yaml = recognizer.analysis_pretty_print()
     yaml_maybe_encrusted = str(recognizer.analysis())
 
-    print("**Pretty Analysis (if clean YAML)L**\n")
     if pretty_data_unless_dirty_yaml == yaml_maybe_encrusted:
         print("Dirty YAML -- No Pretty Analysis\n")
     else:
