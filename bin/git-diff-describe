@@ -1,0 +1,36 @@
+#! /bin/bash
+
+repo_name='git-diff-describe'
+repo_dir=~/repos/"${repo_name}"
+docker_image_name="mrw/${repo_name}"
+
+function warn {
+    echo "$@" >&2
+}
+
+function do_build {
+    do_docker_build=1
+
+    if (( do_docker_build != 0 )); then
+	warn starting 'docker build';
+	warn $(time docker build . --tag "${docker_image_name}");
+    else
+	warn skipping 'docker build';
+    fi
+	
+}
+
+
+function do_run {
+    docker run --interactive \
+	   -e "OPENAI_API_KEY=${OPENAI_API_KEY:?Not set, but needed to initialize OPEN_API_KEY}" \
+	   "${docker_image_name}"
+}
+
+
+function main {
+    cd "${repo_dir}" || exit 1
+    do_build && do_run
+}
+
+main
