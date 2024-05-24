@@ -18,6 +18,6 @@ class Refactoring:
 
             case _:
                 description = (f"{name} - Unhandled Refactoring\n"
-                               f"    {self.attributes}\n")
+                               f"    {self.attributes}")
 
         return description
