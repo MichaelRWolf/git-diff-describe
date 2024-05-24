@@ -2,11 +2,16 @@ FROM python:3
 
 WORKDIR /usr/src/app
 
+# RUN apt-get update && apt-get install -y jq
+# RUN apt-get update && apt-get install -y bat
+# Install dependencies before COPY of requirements.txt && before COPY of app
+RUN apt-get update && apt-get install -y jq && apt-get clean && rm -rf /var/lib/apt/lists/*
+
 COPY requirements.txt ./
+
 RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
-
 
 
 # 1 - Run script and die
@@ -15,14 +20,14 @@ COPY . .
 #     Mike's preference....
 CMD [ "python", "src/refactoring_recognizer.py" ]
 
+
+# Garbage.... snippets-of-purported-gold-but-aged-and-unnecessary
+#
 # Mike said this...
 # Cannot copy ../....
 # The container is rooted at project directory.  There is nothing above it.
 # I am coming in as src/.., but there is no src/../..
 
-
-RUN apt-get update && apt-get install -y jq
-# RUN apt-get update && apt-get install -y bat
 
 
 # How To Build
