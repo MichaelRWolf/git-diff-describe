@@ -20,17 +20,21 @@ class Refactoring:
             case "Extract Class" | "Replace Conditional with Polymorphism":
                 self_attributes_copy = self_attributes.copy()
                 refactoring_name = self_attributes_copy.pop("refactoring_name")
-                original_class = self_attributes_copy.pop("original_class", "<NoOriginalClass>")
-                new_class = self_attributes_copy.pop("new_class", "<NewClass>")
-                classes_in_hierarcy = self_attributes_copy.pop("classes_in_hierarchy", [])
+                original_name = self_attributes_copy.pop("original_name", None)
+                new_name = self_attributes_copy.pop("new_name", None)
+                child_classes = self_attributes_copy.pop("child_classes", [])
+                parent_class = self_attributes_copy.pop("parent_class", None)
 
                 description = (
-                        f"{refactoring_name}: {new_class}"
-                        + (f" (from {original_class})" if original_class else "")
-                        + (f" classes_in_hierarchy: {classes_in_hierarcy})" if classes_in_hierarcy else "")
+                        f"{refactoring_name}:"
+                        + (f" {new_name}" if new_name else "")
+                        + (f" (from {original_name})" if original_name else "")
+                        + (f" {child_classes})" if child_classes else "")
+                        + (" replaces " if (child_classes and parent_class) else "")
+                        + (f" {parent_class}" if parent_class else "")
                         + (
                             ("\n" + f"    {self_attributes_copy}") if self_attributes_copy else ""
-                        ) # Extra parens needed.  Don't know why.
+                        )  # Extra parens needed.  Don't know why.
                 )
 
             case _:

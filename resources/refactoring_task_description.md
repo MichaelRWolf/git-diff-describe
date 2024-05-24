@@ -54,14 +54,23 @@
 # - preferred_name: Extract Class
 #   alternate_names:
 #     - Extract Module
+#   attributes:
+#     - new_name (NOT new_class)
+#     - original_name (NOT original_class)
 # 
 # - preferred_name: Change Signature
 #   alternate_names:
 #     - Modify Function Signature
+#   attributes:
+#     - new_signature
+#     - original_signature
 # 
 # - preferred_name: Replace Conditional with Polymorphism
 #   alternate_names:
 #     - Replace Conditional with Inheritance
+#   attributes:
+#     - parent_class
+#     - child_classes[]
 # 
 # # Format
 # Generate YAML output for refactoring actions.
