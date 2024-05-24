@@ -16,6 +16,15 @@ class Refactoring:
                 new_name = self.attributes.get("new_name")
                 description = f"{name}: {new_name}"
 
+            case "Extract Class" | "Replace Conditional with Polymorphism":
+                new_name = self.attributes.get("new_class", "<NewClass>")
+                original_name = self.attributes.get("original_class")
+                description = (
+                        f"{name}: {new_name}"
+                        + (f" (from {original_name})" if original_name else "")
+                        + "\n"
+                        + f"    {self.attributes}")
+
             case _:
                 description = (f"{name} - Unhandled Refactoring\n"
                                f"    {self.attributes}")
