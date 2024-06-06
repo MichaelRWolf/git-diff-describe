@@ -8,12 +8,16 @@ class Refactoring:
 
         self_attributes = self.attributes
         match name:
+            case "Inline Method" | "Remove Method":
+                original_name = self_attributes["original_name"]
+                description = f"{name}: {original_name}"
+
             case "Rename Variable" | "Rename Method" | "Rename Function" | "Rename Class":
                 original_name = self_attributes["original_name"]
                 new_name = self_attributes["new_name"]
                 description = f"{name}: {new_name} (from {original_name})"
 
-            case "Extract Variable" | "Extract Function" | "Extract Method":
+            case "Extract Variable" | "Extract Function" | "Extract Method" | "Extract Constant":
                 new_name = self_attributes.get("new_name")
                 description = f"{name}: {new_name}"
 
