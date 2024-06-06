@@ -8,6 +8,10 @@ class Refactoring:
 
         self_attributes = self.attributes
         match name:
+            case "Delete File":
+                file_path = self_attributes["file_path"]
+                description = (f"{name} - {file_path}")
+
             case "Inline Method" | "Remove Method":
                 original_name = self_attributes["original_name"]
                 description = f"{name}: {original_name}"
