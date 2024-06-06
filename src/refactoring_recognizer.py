@@ -122,7 +122,7 @@ class RefactoringRecognizer:
                 r = Refactoring(refactoring_attributes['refactoring_name'], refactoring_attributes)
                 stringy = str(r)
             else:
-                stringy = "Non-refactoring:  " + str(refactoring_attributes)
+                stringy = str(refactoring_attributes)
             big_stringy += stringy + "\n"
 
         # return str(analysis_data)
