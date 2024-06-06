@@ -153,11 +153,11 @@ def main():
 
     if pretty_data_unless_dirty_yaml == yaml_maybe_encrusted:
         print("Dirty YAML -- No Pretty Analysis\n")
+        print("\n\n")
+        print("**YAML (probably)**\n")
+        print(yaml_maybe_encrusted + "\n")
     else:
         print(pretty_data_unless_dirty_yaml + "\n")
-    print("\n\n")
-    print("**YAML (probably)**\n")
-    print(yaml_maybe_encrusted + "\n")
 
 
 def run_recognizer(diff_output):
