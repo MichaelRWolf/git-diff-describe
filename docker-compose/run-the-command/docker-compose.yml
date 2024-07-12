@@ -1,0 +1,21 @@
+# docker compose run interactive
+
+version: '3.3'
+
+## low-level docker run command
+# git diff HEAD~0 HEAD~5 | docker run -i -e "OPENAI_API_KEY=$OPENAI_API-KEY"  michaelrwolf/git-diff-describe:latest
+
+## OLD obsolete docker-compose run command
+#  git diff HEAD~0 HEAD~5 | docker-compose run git-diff-describe
+
+## modern docker compose run command
+#  git diff HEAD~0 HEAD~5 | docker compose run git-diff-describe
+
+
+services:
+  git-diff-describe:
+    image: michaelrwolf/git-diff-describe:latest
+    environment:
+      - OPENAI_API_KEY=${OPENAI_API-KEY}
+    stdin_open: true
+
